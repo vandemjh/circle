@@ -1,1 +1,16 @@
-<p>comments works!</p>
+<div>
+    <mat-list *ngFor="let comment of comments">
+        <mat-list-item>
+            <a class="commentor">{{comment.commenter}}</a>
+        </mat-list-item>
+        <mat-divider [inset]="true"></mat-divider>
+    </mat-list>
+    <div class="padding">
+        <form>
+            <mat-form-field appearance="fill">
+                <mat-label>Comment</mat-label>
+                <textarea class="textarea" matInput cdkTextareaAutosize></textarea>
+            </mat-form-field>
+        </form>
+    </div>
+</div>
