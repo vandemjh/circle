@@ -1,51 +1,51 @@
-import { BrowserModule } from '@angular/platform-browser';
-import { NgModule } from '@angular/core';
+import { BrowserModule } from "@angular/platform-browser";
+import { NgModule } from "@angular/core";
 
-import { AppRoutingModule } from './app-routing.module';
-import { AppComponent } from './app.component';
-import { HeaderComponent } from './header/header.component';
-import { NewPostButtonComponent } from './new/new-post-button/new-post-button.component';
-import { CommentsComponent } from './post/comments/comments.component';
-import { PostComponent } from './post/post/post.component';
-import { NewPostFormComponent } from './new/new-post-form/new-post-form.component';
-import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { AppRoutingModule } from "./app-routing.module";
+import { AppComponent } from "./app.component";
+import { HeaderComponent } from "./header/header.component";
+import { NewPostButtonComponent } from "./new/new-post-button/new-post-button.component";
+import { CommentsComponent } from "./post/comments/comments.component";
+import { PostComponent } from "./post/post/post.component";
+import { NewPostFormComponent } from "./new/new-post-form/new-post-form.component";
+import { BrowserAnimationsModule } from "@angular/platform-browser/animations";
 
-import {MatToolbarModule} from '@angular/material/toolbar';
-import {MatMenuModule} from '@angular/material/menu';
-import {MatIconModule} from '@angular/material/icon';
-import {MatCardModule} from '@angular/material/card';
-import {MatButtonModule} from '@angular/material/button';
-import {MatBadgeModule} from '@angular/material/badge';
-import {MatExpansionModule} from '@angular/material/expansion';
-import {MatInputModule} from '@angular/material/input';
-import {MatListModule} from '@angular/material/list';
-import {MatDialogModule} from '@angular/material/dialog';
+import { MatToolbarModule } from "@angular/material/toolbar";
+import { MatMenuModule } from "@angular/material/menu";
+import { MatIconModule } from "@angular/material/icon";
+import { MatCardModule } from "@angular/material/card";
+import { MatButtonModule } from "@angular/material/button";
+import { MatBadgeModule } from "@angular/material/badge";
+import { MatExpansionModule } from "@angular/material/expansion";
+import { MatInputModule } from "@angular/material/input";
+import { MatListModule } from "@angular/material/list";
+import { MatDialogModule } from "@angular/material/dialog";
 
 @NgModule({
-  declarations: [
-    AppComponent,
-    HeaderComponent,
-    NewPostButtonComponent,
-    CommentsComponent,
-    PostComponent,
-    NewPostFormComponent
-  ],
-  imports: [
-    BrowserModule,
-    AppRoutingModule,
-    BrowserAnimationsModule,
-    MatToolbarModule,
-    MatIconModule,
-    MatMenuModule,
-    MatCardModule,
-    MatButtonModule,
-    MatBadgeModule,
-    MatExpansionModule,
-    MatInputModule,
-    MatListModule,
-    MatDialogModule
-  ],
-  providers: [],
-  bootstrap: [AppComponent]
+    declarations: [
+        AppComponent,
+        HeaderComponent,
+        NewPostButtonComponent,
+        CommentsComponent,
+        PostComponent,
+        NewPostFormComponent,
+    ],
+    imports: [
+        BrowserModule,
+        AppRoutingModule,
+        BrowserAnimationsModule,
+        MatToolbarModule,
+        MatIconModule,
+        MatMenuModule,
+        MatCardModule,
+        MatButtonModule,
+        MatBadgeModule,
+        MatExpansionModule,
+        MatInputModule,
+        MatListModule,
+        MatDialogModule,
+    ],
+    providers: [],
+    bootstrap: [AppComponent],
 })
-export class AppModule { }
+export class AppModule {}
