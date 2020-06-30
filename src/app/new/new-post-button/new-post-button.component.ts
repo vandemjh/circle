@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 
 @Component({
-  selector: 'app-new-post-button',
+  selector: 'circle-new-post-button',
   templateUrl: './new-post-button.component.html',
   styleUrls: ['./new-post-button.component.css']
 })

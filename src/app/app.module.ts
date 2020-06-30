@@ -10,6 +10,17 @@ import { PostComponent } from './post/post/post.component';
 import { NewPostFormComponent } from './new/new-post-form/new-post-form.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
+import {MatToolbarModule} from '@angular/material/toolbar'
+import {MatMenuModule} from '@angular/material/menu'
+import {MatIconModule} from '@angular/material/icon'
+import {MatCardModule} from '@angular/material/card'
+import {MatButtonModule} from '@angular/material/button'
+import {MatBadgeModule} from '@angular/material/badge'
+import {MatExpansionModule} from '@angular/material/expansion'
+import {MatInputModule} from '@angular/material/input'
+import {MatListModule} from '@angular/material/list'
+import {MatDialogModule} from '@angular/material/dialog'
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -22,7 +33,17 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
   imports: [
     BrowserModule,
     AppRoutingModule,
-    BrowserAnimationsModule
+    BrowserAnimationsModule,
+    MatToolbarModule,
+    MatIconModule,
+    MatMenuModule,
+    MatCardModule,
+    MatButtonModule,
+    MatBadgeModule,
+    MatExpansionModule,
+    MatInputModule,
+    MatListModule,
+    MatDialogModule
   ],
   providers: [],
   bootstrap: [AppComponent]
