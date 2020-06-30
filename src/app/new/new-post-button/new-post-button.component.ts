@@ -1,4 +1,7 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Input } from '@angular/core';
+import {NewPostFormComponent} from '../new-post-form/new-post-form.component'
+import {MatDialog} from '@angular/material/dialog'
+
 
 @Component({
   selector: 'circle-new-post-button',
@@ -6,8 +9,12 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./new-post-button.component.css']
 })
 export class NewPostButtonComponent implements OnInit {
-
-  constructor() { }
+  @Input() username: string;
+  constructor(private dialog: MatDialog) { }
+  openDialog(): void {
+    console.log("open")
+    this.dialog.open(NewPostFormComponent)
+  }
 
   ngOnInit(): void {
   }
