@@ -11,7 +11,6 @@ export class NewPostButtonComponent implements OnInit {
     @Input() username: string;
     constructor(private dialog: MatDialog) {}
     openDialog(): void {
-        console.log("open");
         this.dialog.open(NewPostFormComponent);
     }
 
