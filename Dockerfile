@@ -1,9 +1,13 @@
-FROM node:6
-RUN mkdir -p /usr/src/app
-WORKDIR /usr/src/app
-COPY package.json /usr/src/app
-RUN npm cache clean
+# Build stage
+FROM node AS builder
+RUN mkdir -p /build
+WORKDIR /build
+COPY package.json /build
 RUN npm install
-COPY . /usr/src/app
-EXPOSE 4200
-CMD ["npm","start"]
+COPY . /build
+RUN npm run build --prod
+
+# Serve stage
+FROM nginx AS serve
+COPY --from=builder /build/dist/circle/ /usr/share/nginx/html/
+# EXPOSE 80
