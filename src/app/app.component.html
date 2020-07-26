@@ -1,8 +1,10 @@
 <circle-header></circle-header>
 <circle-new-post-button></circle-new-post-button>
-<circle-post></circle-post>
-<circle-post></circle-post>
-<circle-post></circle-post>
-<circle-post></circle-post>
-<circle-post></circle-post>
-<circle-post></circle-post>
+<div *ngFor="let post of posts">
+    <!-- [favorited]="" -->
+    <!-- [profilePictureURL]="post." -->
+    <!-- [comments]="post." -->
+    <!-- [likes]="post." -->
+    <circle-post
+    ></circle-post>
+</div>
