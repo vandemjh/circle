@@ -15,6 +15,7 @@ export class CircleService {
     return this.http.post<Post>(environment.apiUrl + "/posts/", toPost);
   }
   getPosts(): Observable<Post[]> {
+    console.log(environment.apiUrl)
     return this.http.get<Post[]>(environment.apiUrl + "/posts/");
   }
 }
