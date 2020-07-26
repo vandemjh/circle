@@ -9,5 +9,6 @@ RUN npm run build --prod
 
 # Serve stage
 FROM nginx AS serve
+COPY nginx.conf /usr/local/nginx/conf/
 COPY --from=builder /build/dist/circle/ /usr/share/nginx/html/
 # EXPOSE 80
