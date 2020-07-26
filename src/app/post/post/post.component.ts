@@ -1,4 +1,4 @@
-import { Component, OnInit } from "@angular/core";
+import { Component, OnInit, Input } from "@angular/core";
 import { Comment } from "../../classes/comment/comment";
 
 @Component({
@@ -7,6 +7,7 @@ import { Comment } from "../../classes/comment/comment";
     styleUrls: ["./post.component.css"],
 })
 export class PostComponent implements OnInit {
+    @Input() userId: string;
     favorited: boolean;
     profilePictureURL: string;
     comments: Comment[];

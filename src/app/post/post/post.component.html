@@ -1,8 +1,9 @@
 <div class="padding">
     <mat-card class="card">
         <mat-card-header>
+            <!-- [ngStyle]="{ 'background-image': 'url (' + this.profilePictureURL + ')'}" -->
             <div
-                [ngStyle]="{ 'background-image': this.profilePictureURL }"
+                [style.background-image]="'url(' + this.profilePictureURL + ')'"
                 mat-card-avatar
                 class="header-image"
             ></div>
