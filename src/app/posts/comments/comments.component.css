@@ -1,0 +1,9 @@
+.padding {
+    padding-top: 10px;
+}
+.commenter {
+    padding-right: 10px;
+}
+.textarea {
+    resize: none;
+}

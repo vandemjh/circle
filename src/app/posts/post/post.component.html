@@ -1,0 +1,48 @@
+<div class="padding">
+    <mat-card class="card">
+        <mat-card-header>
+            <!-- [ngStyle]="{ 'background-image': 'url (' + this.profilePictureURL + ')'}" -->
+            <div
+                [style.background-image]="'url(' + this.profilePictureURL + ')'"
+                mat-card-avatar
+                class="header-image"
+            ></div>
+            <mat-card-title>Shiba Inu</mat-card-title>
+            <mat-card-subtitle>Dog Breed</mat-card-subtitle>
+        </mat-card-header>
+        <img
+            mat-card-image
+            src="{{ this.imageUrl }}"
+            />
+        <mat-card-content>
+            <p>this is card content about the above picture</p>
+        </mat-card-content>
+        <mat-card-actions>
+            <button
+                (click)="toggleFavorited()"
+                matBadge="{{ getLikes() }}"
+                [matBadgeHidden]="numberOfLikesHidden()"
+                matBadgePosition="above after"
+                matBadgeColor="accent"
+                mat-icon-button
+                color="{{ isFavorited() ? 'warn' : 'white' }}"
+                aria-label="Favorite"
+            >
+                <mat-icon>favorite</mat-icon>
+            </button>
+            <button
+                (click)="toggleExpanded()"
+                mat-button
+                matBadge="{{ getNumberOfComments() }}"
+                matBadgePosition="above after"
+                matBadgeColor="accent"
+            >
+                COMMENT
+            </button>
+            <button mat-button>SHARE</button>
+        </mat-card-actions>
+        <ng-template [ngIf]="expanded">
+            <circle-comments [comments]="this.comments"></circle-comments>
+        </ng-template>
+    </mat-card>
+</div>
