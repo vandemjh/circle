@@ -3,6 +3,7 @@ import { environment } from '../../environments/environment'
 import { HttpClient } from '@angular/common/http';
 import { Post } from '../classes/post/post'
 import { Observable, of } from 'rxjs';
+import { User } from '../classes/user/user';
 
 @Injectable({
   providedIn: 'root'
@@ -21,11 +22,20 @@ export class CircleService {
       new Post("posterId2", "https://hips.hearstapps.com/hmg-prod.s3.amazonaws.com/images/golden-retriever-royalty-free-image-506756303-1560962726.jpg?crop=0.672xw:1.00xh;0.166xw,0&resize=640:*", "location2", "description2"),
       new Post("posterId3", "https://s3.amazonaws.com/cdn-origin-etr.akc.org/wp-content/uploads/2017/11/17140825/Swedish-Vallhund-head-portrait-outdoors.jpg", "location3", "description3")
     ]);
-    // return this.http.get<Post[]>(environment.apiUrl + "/posts/");
+    // return this.http.get<Post[]>(environment.apiUrl + "posts");
   }
 
   getUserId(userId: string): Observable<string> {
     return of("testUserId")
-    // return this.http.get<string>(environment.apiUrl + "/" + userId);
+    // return this.http.get<string>(environment.apiUrl + userId);
+  }
+
+  /**
+   * Returns user object from userId
+   * @param userId to retreive user data from
+   */
+  getUser(userId: string): Observable<User> {
+    return of(new User("testUsername", "https://material.angular.io/assets/img/examples/shiba1.jpg"))
+    // return this.http.get<User>(environment.apiUrl + userId)
   }
 }

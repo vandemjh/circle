@@ -1,13 +1,13 @@
 import { User } from '../user/user';
 
 export class Post {
-    constructor(posterId?: string, imageUrl?: string, location?: string, description?: string) {
+    constructor(poster?: User, imageUrl?: string, location?: string, description?: string) {
         this.imageUrl = imageUrl;
-        this.posterId = posterId;
+        this.poster = poster;
         this.location = location;
         this.description = description;
     }
-    posterId: string;
+    poster: User;
     location: string;
     imageUrl: string;
     description: string;

@@ -1,6 +1,7 @@
 import { Component, OnInit, Input, OnChanges, SimpleChanges } from '@angular/core';
 import { Comment } from '../../classes/comment/comment';
 import { Post } from '../../classes/post/post';
+import { CircleService } from 'src/app/services/circle.service';
 
 @Component({
     selector: 'circle-post',
@@ -17,13 +18,14 @@ export class PostComponent extends Post implements OnInit, OnChanges {
     profilePictureURL: string;
     expanded: boolean;
 
-    constructor() {
+    constructor(private service: CircleService) {
         super();
     }
+    
     ngOnChanges(changes: SimpleChanges): void {
         if (changes.post.currentValue instanceof Post) {
+            this.poster = this.post.poster;
             this.imageUrl = this.post.imageUrl;
-            this.posterId = this.post.posterId;
             this.location = this.post.location;
             this.description = this.post.description;
         }
@@ -49,7 +51,6 @@ export class PostComponent extends Post implements OnInit, OnChanges {
     isFavorited(): boolean {
         return this.favorited;
     }
-
     toggleFavorited(): void {
         if (!this.favorited) this.likes.push(this.userId);
         else this.likes.splice(this.likes.indexOf(this.userId), 1);

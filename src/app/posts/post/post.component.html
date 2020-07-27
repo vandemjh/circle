@@ -1,13 +1,12 @@
 <div class="padding">
     <mat-card class="card">
         <mat-card-header>
-            <!-- [ngStyle]="{ 'background-image': 'url (' + this.profilePictureURL + ')'}" -->
             <div
                 [style.background-image]="'url(' + this.profilePictureURL + ')'"
                 mat-card-avatar
                 class="header-image"
             ></div>
-            <mat-card-title>Shiba Inu</mat-card-title>
+            <mat-card-title>{{ this.poster.username }}</mat-card-title>
             <mat-card-subtitle>Dog Breed</mat-card-subtitle>
         </mat-card-header>
         <img
@@ -15,7 +14,9 @@
             src="{{ this.imageUrl }}"
             />
         <mat-card-content>
-            <p>this is card content about the above picture</p>
+            <p>
+                {{ this.description }}
+            </p>
         </mat-card-content>
         <mat-card-actions>
             <button
