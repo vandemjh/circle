@@ -7,8 +7,8 @@ import { AppRoutingModule } from "./app-routing.module";
 import { AppComponent } from "./app.component";
 import { HeaderComponent } from "./header/header.component";
 import { NewPostButtonComponent } from "./new/new-post-button/new-post-button.component";
-import { CommentsComponent } from "./post/comments/comments.component";
-import { PostComponent } from "./post/post/post.component";
+import { CommentsComponent } from "./posts/comments/comments.component";
+import { PostComponent } from "./posts/post/post.component";
 import { NewPostFormComponent } from "./new/new-post-form/new-post-form.component";
 import { BrowserAnimationsModule } from "@angular/platform-browser/animations";
 

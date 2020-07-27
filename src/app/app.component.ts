@@ -7,24 +7,26 @@ import {Post} from './classes/post/post';
     templateUrl: "./app.component.html",
     styleUrls: ["./app.component.css"],
 })
-export class AppComponent {
+export class AppComponent implements OnInit {
     title = "Circle";
+    userId: string = "jack";
     posts: Post[];
     constructor(private service: CircleService) {}
     
     ngOnInit(): void {
         this.posts = [];
-        // this.posts = [
-        //     new Post("asdf", "123", "brownsville", "this is description"),
-        //     new Post("asdf", "123", "brownsville", "this is description"),
-        //     new Post("asdf", "123", "brownsville", "this is description"),
-        // ]
+        this.setUserId();
+        this.getPosts();
     }
 
     getPosts(): void {
-        this.posts = [
-            new Post("asdf", "123", "brownsville", "this is description")
-        ]
-        // this.service.getPosts().subscribe();
+        this.service.getPosts().subscribe(posts => this.posts = posts);
+    }
+
+    /**
+     * Assigns the current userId to the one associated with the logged in user???
+     */
+    setUserId(): void {
+        this.service.getUserId(this.userId).subscribe(id => this.userId = id);
     }
 }
