@@ -1,6 +1,7 @@
 import { Component, OnInit } from "@angular/core";
 import {CircleService} from './services/circle.service'
 import {Post} from './classes/post/post';
+import { User } from './classes/user/user';
 
 @Component({
     selector: "circle-root",
@@ -9,13 +10,16 @@ import {Post} from './classes/post/post';
 })
 export class AppComponent implements OnInit {
     title = "Circle";
-    userId: string = "jack";
+    /**
+     * Logged in user.
+     */
+    user: User;
     posts: Post[];
     constructor(private service: CircleService) {}
     
     ngOnInit(): void {
         this.posts = [];
-        this.setUserId();
+        this.setUser();
         this.getPosts();
     }
 
@@ -24,10 +28,10 @@ export class AppComponent implements OnInit {
     }
 
     /**
-     * Assigns the current userId to the one associated with the logged in user???
+     * Assigns the current user to the one associated with the logged in user???
      */
-    setUserId(): void {
-        this.service.getUserId(this.userId).subscribe(id => this.userId = id);
+    setUser(): void {
+        this.service.getUser("jack").subscribe(id => this.user = id);
     }
 
     onScroll() {

@@ -1,8 +1,10 @@
+import { User } from '../user/user';
+
 export class Comment {
-    commenterId: string;
+    commenter: User;
     comment: string;
-    constructor(commenterId: string, comment: string) {
+    constructor(commenter: User, comment: string) {
         this.comment = comment;
-        this.commenterId = commenterId;
+        this.commenter = commenter;
     }
 }

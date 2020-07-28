@@ -13,7 +13,7 @@ export class PostComponent extends Post implements OnInit, OnChanges {
     /**
      * Logged in user
      */
-    @Input() userId: string;
+    @Input() user: User;
     @Input() post: Post;
     poster: User;
     favorited: boolean;
@@ -33,17 +33,7 @@ export class PostComponent extends Post implements OnInit, OnChanges {
     }
 
     ngOnInit(): void {
-        this.comments = [];
-        this.likes = [];
         this.expanded = false;
-        // console.log(this.imageUrl)
-        // this.favorited = Math.random() >= 0.5;
-        // this.profilePictureURL = "https://material.angular.io/assets/img/examples/shiba1.jpg";
-        // this.comments.push(
-        //     new Comment("asdf", "this is a comment"),
-        //     new Comment("asdf", "this is another comment")
-        // );
-        // this.likes = ["asdf", "admin"];
     }
 
     toggleExpanded(): void {
@@ -53,17 +43,17 @@ export class PostComponent extends Post implements OnInit, OnChanges {
         return this.favorited;
     }
     toggleFavorited(): void {
-        if (!this.favorited) this.likes.push(this.userId);
-        else this.likes.splice(this.likes.indexOf(this.userId), 1);
+        if (!this.favorited) this.likes.push(this.user);
+        else this.likes.splice(this.likes.indexOf(this.user), 1);
         this.favorited = !this.favorited;
     }
-    getLikes(): number {
-        return this.likes.length;
+    getNumberOfLikes(): number {
+        return !!this.likes ? this.likes.length : 0;
     }
     getNumberOfComments(): number {
         return this.comments.length;
     }
     numberOfLikesHidden(): boolean {
-        return this.getLikes() <= 0;
+        return this.getNumberOfLikes() <= 0;
     }
 }

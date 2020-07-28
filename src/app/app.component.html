@@ -1,6 +1,6 @@
 <circle-header></circle-header>
 <circle-new-post-button></circle-new-post-button>
 <div *ngFor="let post of posts">
-    <circle-post [userId]="this.userId" [post]="post"></circle-post>
+    <circle-post [user]="this.user" [post]="post"></circle-post>
 </div>
 <div infiniteScroll [infiniteScrollDistance]="1" (scrolled)="onScroll()"></div>

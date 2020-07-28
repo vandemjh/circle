@@ -25,7 +25,7 @@
         <mat-card-actions>
             <button
                 (click)="toggleFavorited()"
-                matBadge="{{ getLikes() }}"
+                matBadge="{{ getNumberOfLikes() }}"
                 [matBadgeHidden]="numberOfLikesHidden()"
                 matBadgePosition="above after"
                 matBadgeColor="accent"
