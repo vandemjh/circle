@@ -25,17 +25,15 @@ export class PostComponent extends Post implements OnInit, OnChanges {
     
     ngOnChanges(changes: SimpleChanges): void {
         if (changes.post.currentValue instanceof Post) {
-            this.poster = this.post.poster;
-            this.imageUrl = this.post.imageUrl;
-            this.location = this.post.location;
-            this.description = this.post.description;
+            // console.log(Object.assign(this, changes.post.currentValue));
+            Object.assign(this, changes.post.currentValue);
         }
     }
 
     ngOnInit(): void {
         this.expanded = false;
     }
-
+    
     toggleExpanded(): void {
         this.expanded = !this.expanded;
     }

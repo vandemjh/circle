@@ -1,9 +1,14 @@
 .padding {
-    padding-top: 10px;
+    padding-top: 1em;
 }
-.commenter {
-    padding-right: 10px;
+.comment {
+    margin-bottom: 0;
 }
 .textarea {
     resize: none;
+}
+.space {
+    margin-bottom: 0;
+    padding-left: 1em;
+    padding-right: 1em;
 }
