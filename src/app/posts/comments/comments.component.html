@@ -2,7 +2,7 @@
     <ng-template [ngIf]="!!comments && comments.length > 0">
         <mat-list *ngFor="let comment of comments">
             <mat-list-item>
-                <a class="commentor">{{ comment.commenter }}</a>
+                <a class="commentor">{{ comment.commenterId }}</a>
             </mat-list-item>
             <mat-divider [inset]="true"></mat-divider>
         </mat-list>
@@ -11,13 +11,16 @@
         <form [formGroup]="commentForm" (ngSubmit)="submitComment()">
             <mat-form-field appearance="fill">
                 <mat-label>Comment</mat-label>
-                <textarea 
-                formControlName="comment"
-                class="textarea"
-                matInput
-                cdkTextareaAutosize
+                <textarea
+                    formControlName="comment"
+                    class="textarea"
+                    matInput
+                    cdkTextareaAutosize
                 ></textarea>
             </mat-form-field>
+            <button mat-raised-button color="primary" type="submit">
+                Submit
+            </button>
         </form>
     </div>
 </div>
