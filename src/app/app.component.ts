@@ -20,7 +20,7 @@ export class AppComponent implements OnInit {
     }
 
     getPosts(): void {
-        this.service.getPosts().subscribe(posts => this.posts = posts);
+        this.service.getPosts().subscribe(posts => this.posts.push(...posts));
     }
 
     /**
@@ -28,5 +28,9 @@ export class AppComponent implements OnInit {
      */
     setUserId(): void {
         this.service.getUserId(this.userId).subscribe(id => this.userId = id);
+    }
+
+    onScroll() {
+        this.getPosts();
     }
 }
