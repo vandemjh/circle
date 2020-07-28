@@ -1,7 +1,8 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Input } from '@angular/core';
 import { FormGroup, FormControl } from '@angular/forms';
 import { Post } from '../../classes/post/post';
 import { CircleService } from '../../services/circle.service';
+import { User } from 'src/app/classes/user/user';
 
 @Component({
   selector: 'circle-new-post-form',
@@ -9,7 +10,7 @@ import { CircleService } from '../../services/circle.service';
   styleUrls: ['./new-post-form.component.css'],
 })
 export class NewPostFormComponent implements OnInit {
-  toPost: Post;
+  user: User;
   postForm = new FormGroup({
     poster: new FormControl(''),
     location: new FormControl(''),
@@ -18,12 +19,18 @@ export class NewPostFormComponent implements OnInit {
   });
   constructor(private circleService: CircleService) {}
 
-  ngOnInit(): void {
-    this.circleService.getPosts().subscribe((x) => console.log(x));
-  }
+  ngOnInit(): void {}
   onSubmit() {
+    console.log(this.user)
     this.circleService
-      .submitPost(new Post(this.postForm.value.imageUrl))
+      .submitPost(new Post(
+        this.user, 
+        this.postForm.value.imageUrl,
+        this.postForm.value.location,
+        this.postForm.value.description,
+        [],
+        []
+        ))
       .subscribe((x) => console.log(x));
   }
 }

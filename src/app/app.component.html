@@ -1,5 +1,5 @@
 <circle-header></circle-header>
-<circle-new-post-button></circle-new-post-button>
+<circle-new-post-button [user]="this.user"></circle-new-post-button>
 <div *ngFor="let post of posts">
     <circle-post [user]="this.user" [post]="post"></circle-post>
 </div>
