@@ -1,8 +1,8 @@
 export class Comment {
-    commenter: string;
+    commenterId: string;
     comment: string;
-    constructor(commenter: string, comment: string) {
+    constructor(commenterId: string, comment: string) {
         this.comment = comment;
-        this.commenter = commenter;
+        this.commenterId = commenterId;
     }
 }

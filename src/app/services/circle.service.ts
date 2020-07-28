@@ -4,6 +4,7 @@ import { HttpClient } from '@angular/common/http';
 import { Post } from '../classes/post/post';
 import { Observable, of } from 'rxjs';
 import { User } from '../classes/user/user';
+import { Comment } from '../classes/comment/comment';
 
 @Injectable({
   providedIn: 'root',
@@ -25,7 +26,11 @@ export class CircleService {
         ),
         'https://material.angular.io/assets/img/examples/shiba1.jpg',
         'location',
-        'description'
+        'description',
+        [
+          new Comment('commentId', 'this is a comment'),
+          new Comment('commentId1', 'this is another comment'),
+        ]
       ),
       new Post(
         new User(
@@ -36,7 +41,11 @@ export class CircleService {
         ),
         'https://www.sciencemag.org/sites/default/files/styles/inline__450w__no_aspect/public/dogs_1280p_0.jpg?itok=4t_1_fSJ',
         'location1',
-        'description1'
+        'description1',
+        [
+          new Comment('commentId2', 'this is a comment'),
+          new Comment('commentId3', 'this is another comment'),
+        ]
       ),
       new Post(
         new User(
@@ -58,7 +67,11 @@ export class CircleService {
         ),
         'https://s3.amazonaws.com/cdn-origin-etr.akc.org/wp-content/uploads/2017/11/17140825/Swedish-Vallhund-head-portrait-outdoors.jpg',
         'location3',
-        'description3'
+        'description3',
+        [
+          new Comment('commentId3', 'this is a comment'),
+          new Comment('commentId4', 'this is another comment'),
+        ]
       ),
     ]);
     // return this.http.get<Post[]>(environment.apiUrl + "posts");
