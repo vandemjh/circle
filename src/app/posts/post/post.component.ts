@@ -2,6 +2,7 @@ import { Component, OnInit, Input, OnChanges, SimpleChanges } from '@angular/cor
 import { Comment } from '../../classes/comment/comment';
 import { Post } from '../../classes/post/post';
 import { CircleService } from 'src/app/services/circle.service';
+import { User } from 'src/app/classes/user/user';
 
 @Component({
     selector: 'circle-post',
@@ -14,8 +15,8 @@ export class PostComponent extends Post implements OnInit, OnChanges {
      */
     @Input() userId: string;
     @Input() post: Post;
+    poster: User;
     favorited: boolean;
-    profilePictureURL: string;
     expanded: boolean;
 
     constructor(private service: CircleService) {

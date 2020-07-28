@@ -1,18 +1,22 @@
 <div class="padding">
     <mat-card class="card">
+        <ng-template [ngIf]="!!this.poster">
         <mat-card-header>
-            <div
-                [style.background-image]="'url(' + this.profilePictureURL + ')'"
+                <div
                 mat-card-avatar
+                [style.background-image]="'url(' + this.poster.profilePictureURL + ')'"
                 class="header-image"
-            ></div>
-            <mat-card-title>{{ this.poster.username }}</mat-card-title>
-            <mat-card-subtitle>Dog Breed</mat-card-subtitle>
-        </mat-card-header>
-        <img
+                ></div>
+                <mat-card-title>{{ this.poster.username }}</mat-card-title>
+                <mat-card-subtitle>Dog Breed</mat-card-subtitle>
+            </mat-card-header>
+        </ng-template>
+        <ng-template [ngIf]="!!this.imageUrl">
+            <img
             mat-card-image
             src="{{ this.imageUrl }}"
             />
+        </ng-template>
         <mat-card-content>
             <p>
                 {{ this.description }}
