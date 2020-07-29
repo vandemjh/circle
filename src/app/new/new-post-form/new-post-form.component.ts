@@ -1,8 +1,8 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { FormGroup, FormControl } from '@angular/forms';
-import { Post } from '../../types/post/post';
+import { Post } from '../../models/post/post';
 import { CircleService } from '../../services/circle.service';
-import { User } from 'src/app/types/user/user';
+import { User } from 'src/app/models/user/user';
 
 @Component({
   selector: 'circle-new-post-form',

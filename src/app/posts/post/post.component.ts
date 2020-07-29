@@ -1,8 +1,8 @@
 import { Component, OnInit, Input, OnChanges, SimpleChanges } from '@angular/core';
-import { Comment } from '../../types/comment/comment';
-import { Post } from '../../types/post/post';
+import { Comment } from '../../models/comment/comment';
+import { Post } from '../../models/post/post';
 import { CircleService } from 'src/app/services/circle.service';
-import { User } from 'src/app/types/user/user';
+import { User } from 'src/app/models/user/user';
 
 @Component({
     selector: 'circle-post',
@@ -25,7 +25,7 @@ export class PostComponent extends Post implements OnInit, OnChanges {
     
     ngOnChanges(changes: SimpleChanges): void {
         if (changes.post.currentValue instanceof Post) {
-            // console.log(Object.assign(this, changes.post.curr    entValue));
+            // console.log(Object.assign(this, changes.post.currentValue));
             Object.assign(this, changes.post.currentValue);
         }
     }

@@ -24,3 +24,8 @@ export class Post {
   comments: Comment[];
   likes: User[];
 }
+
+export class PostResponse extends Post {
+  pid: string;
+  post: Post;
+}

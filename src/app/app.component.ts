@@ -1,22 +1,22 @@
-import { Component, OnInit } from "@angular/core";
-import {CircleService} from './services/circle.service'
-import {Post} from './types/post/post';
-import { User } from './types/user/user';
+import { Component, OnInit } from '@angular/core';
+import { CircleService } from './services/circle.service';
+import { Post, PostResponse } from './models/post/post';
+import { User } from './models/user/user';
 
 @Component({
-    selector: "circle-root",
-    templateUrl: "./app.component.html",
-    styleUrls: ["./app.component.css"],
+    selector: 'circle-root',
+    templateUrl: './app.component.html',
+    styleUrls: ['./app.component.css'],
 })
 export class AppComponent implements OnInit {
-    title = "Circle";
+    title = 'Circle';
     /**
      * Logged in user.
      */
     user: User;
     posts: Post[];
     constructor(private service: CircleService) {}
-    
+
     ngOnInit(): void {
         this.posts = [];
         this.setUser();
@@ -24,18 +24,14 @@ export class AppComponent implements OnInit {
     }
 
     getPosts(): void {
-        this.service.getPosts().subscribe(posts => {
-            console.log(posts)
-            // posts.forEach(post => this.posts.push(post.post))
-        // });
-            this.posts.push(...posts)});
+        this.service.getPosts().subscribe(posts => this.posts.push(...posts));
     }
 
     /**
      * Assigns the current user to the one associated with the logged in user???
      */
     setUser(): void {
-        this.service.getUser("jack").subscribe(id => this.user = id);
+        this.service.getUser('jack').subscribe((id) => (this.user = id));
     }
 
     onScroll() {
