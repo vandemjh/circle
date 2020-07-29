@@ -1,7 +1,8 @@
 import { User } from '../user/user';
 import { Comment } from '../comment/comment';
+import {Deserializable} from '../deserializable/deserializable'
 
-export class Post {
+export class Post implements Deserializable {
   constructor(
     poster?: User,
     imageUrl?: string,
@@ -23,6 +24,10 @@ export class Post {
   description: string;
   comments: Comment[];
   likes: User[];
+  deserialize(input: any): this {
+    Object.assign(this, input);
+    return this;
+  }
 }
 
 export class PostResponse extends Post {
