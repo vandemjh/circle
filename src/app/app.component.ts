@@ -30,7 +30,7 @@ export class AppComponent implements OnInit {
         this.service.getPosts().subscribe(postResponse => {
             postResponse.forEach(post => {
                 this.posts.push(post.post);
-                console.log(this.posts)
+                // console.log(this.posts)
             })
         })
     }

@@ -1,5 +1,4 @@
 import { User } from '../user/user';
-import { Deserializable } from '../deserializable/deserializable';
 import { Element } from '../element/element';
 
 export class Comment extends Element {
