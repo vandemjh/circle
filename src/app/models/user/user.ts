@@ -1,4 +1,5 @@
 import { Element } from '../element/element';
+import { deserialize } from 'class-transformer';
 
 export class User extends Element {
     constructor(username?: string, firstName?: string, lastName?: string, profilePictureURL?: string) {
@@ -12,4 +13,7 @@ export class User extends Element {
     firstName: string;
     lastName: string;
     profilePictureURL: string;
+    deserialize(input: any) {
+        return deserialize<User>(User, JSON.stringify(input));
+    }
 }

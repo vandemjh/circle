@@ -1,8 +1,5 @@
 import { Deserializable } from '../deserializable/deserializable';
 
-export class Element implements Deserializable {
-    deserialize(input: any): this {
-        console.log(input)
-        return undefined;
-    }
+export abstract class Element implements Deserializable {
+    abstract deserialize(input: any);
 }

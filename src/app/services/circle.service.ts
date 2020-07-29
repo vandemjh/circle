@@ -23,7 +23,6 @@ export class CircleService {
             map((result) => {
                 (result as PostResponse[]).forEach((item: PostResponse) => {
                     item = new PostResponse().deserialize(item)
-                    // console.log(item.post)
                 }
                 );
                 return result;
