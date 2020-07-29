@@ -1,8 +1,8 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { FormGroup, FormControl } from '@angular/forms';
-import { Post } from '../../classes/post/post';
+import { Post } from '../../types/post/post';
 import { CircleService } from '../../services/circle.service';
-import { User } from 'src/app/classes/user/user';
+import { User } from 'src/app/types/user/user';
 
 @Component({
   selector: 'circle-new-post-form',
@@ -21,7 +21,6 @@ export class NewPostFormComponent implements OnInit {
 
   ngOnInit(): void {}
   onSubmit() {
-    console.log(this.user)
     this.circleService
       .submitPost(new Post(
         this.user, 

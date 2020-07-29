@@ -1,7 +1,7 @@
 import { Component, OnInit } from "@angular/core";
 import {CircleService} from './services/circle.service'
-import {Post} from './classes/post/post';
-import { User } from './classes/user/user';
+import {Post} from './types/post/post';
+import { User } from './types/user/user';
 
 @Component({
     selector: "circle-root",
@@ -26,6 +26,8 @@ export class AppComponent implements OnInit {
     getPosts(): void {
         this.service.getPosts().subscribe(posts => {
             console.log(posts)
+            // posts.forEach(post => this.posts.push(post.post))
+        // });
             this.posts.push(...posts)});
     }
 

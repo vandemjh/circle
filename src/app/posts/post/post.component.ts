@@ -1,8 +1,8 @@
 import { Component, OnInit, Input, OnChanges, SimpleChanges } from '@angular/core';
-import { Comment } from '../../classes/comment/comment';
-import { Post } from '../../classes/post/post';
+import { Comment } from '../../types/comment/comment';
+import { Post } from '../../types/post/post';
 import { CircleService } from 'src/app/services/circle.service';
-import { User } from 'src/app/classes/user/user';
+import { User } from 'src/app/types/user/user';
 
 @Component({
     selector: 'circle-post',
