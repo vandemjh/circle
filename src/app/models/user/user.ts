@@ -1,4 +1,3 @@
-import { Deserializable } from '../deserializable/deserializable';
 import { Element } from '../element/element';
 
 export class User extends Element {

@@ -1,6 +1,5 @@
 import { User } from '../user/user';
 import { Comment } from '../comment/comment';
-import { Deserializable } from '../deserializable/deserializable';
 import { Element } from '../element/element'
 
 export class Post extends Element {
