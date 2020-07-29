@@ -23,8 +23,16 @@ export class AppComponent implements OnInit {
         this.getPosts();
     }
 
+    /**
+     * Move this to the service soon
+     */
     getPosts(): void {
-        this.service.getPosts().subscribe(posts => this.posts.push(...posts));
+        this.service.getPosts().subscribe(postResponse => {
+            postResponse.forEach(post => {
+                this.posts.push(post.post);
+                console.log(this.posts)
+            })
+        })
     }
 
     /**

@@ -5,6 +5,7 @@ import { Post, PostResponse } from '../models/post/post';
 import { Observable, of } from 'rxjs';
 import { User } from '../models/user/user';
 import { Comment } from '../models/comment/comment';
+import { map } from 'rxjs/operators';
 
 @Injectable({
     providedIn: 'root',
@@ -18,11 +19,16 @@ export class CircleService {
     }
 
     getPosts(): Observable<PostResponse[]> {
-        return this.http
-            .get<PostResponse[]>(environment.apiUrl + 'posts')
-            .pipe((data) => {
-                console.log(data);
-            });
+        return this.http.get<PostResponse[]>(environment.apiUrl + 'posts').pipe(
+            map((result) => {
+                (result as PostResponse[]).forEach((item: PostResponse) => {
+                    item = new PostResponse().deserialize(item)
+                    // console.log(item.post)
+                }
+                );
+                return result;
+            })
+        );
     }
 
     getUserId(userId: string): Observable<string> {

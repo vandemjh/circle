@@ -1,7 +1,9 @@
 import { Deserializable } from '../deserializable/deserializable';
+import { Element } from '../element/element';
 
-export class User implements Deserializable {
+export class User extends Element {
     constructor(username?: string, firstName?: string, lastName?: string, profilePictureURL?: string) {
+        super();
         this.username = username;
         this.firstName = firstName;
         this.lastName = lastName;
@@ -11,8 +13,4 @@ export class User implements Deserializable {
     firstName: string;
     lastName: string;
     profilePictureURL: string;
-    deserialize(input: any): this {
-        Object.assign(this, input);
-        return this;
-    }
 }

@@ -1,8 +1,9 @@
 import { User } from '../user/user';
 import { Comment } from '../comment/comment';
-import {Deserializable} from '../deserializable/deserializable'
+import { Deserializable } from '../deserializable/deserializable';
+import { Element } from '../element/element'
 
-export class Post implements Deserializable {
+export class Post extends Element {
   constructor(
     poster?: User,
     imageUrl?: string,
@@ -11,6 +12,7 @@ export class Post implements Deserializable {
     comments?: Comment[],
     likes?: User[]
   ) {
+    super();
     this.poster = poster;
     this.imageUrl = imageUrl;
     this.location = location;
@@ -24,13 +26,9 @@ export class Post implements Deserializable {
   description: string;
   comments: Comment[];
   likes: User[];
-  deserialize(input: any): this {
-    Object.assign(this, input);
-    return this;
-  }
 }
 
-export class PostResponse extends Post {
+export class PostResponse extends Element {
   pid: string;
   post: Post;
 }
