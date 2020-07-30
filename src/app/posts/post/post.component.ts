@@ -24,9 +24,11 @@ export class PostComponent extends Post implements OnInit, OnChanges {
     }
     
     ngOnChanges(changes: SimpleChanges): void {
-        if (changes.post.currentValue instanceof Post) {
+        // console.log(changes.post.currentValue)
+        if (changes.post) {
             // console.log(Object.assign(this, changes.post.currentValue));
             this.deserialize(changes.post.currentValue);
+            console.log(changes.post.currentValue)
         }
     }
 

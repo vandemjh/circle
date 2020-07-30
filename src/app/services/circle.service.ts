@@ -18,7 +18,9 @@ export class CircleService {
   }
 
   getNewestPosts(time: Moment): Observable<PostResponse[]> {
-    return this.http.get<PostResponse[]>(environment.apiUrl + 'posts/postedSince/');
+    return this.http.get<PostResponse[]>(
+      environment.apiUrl + 'posts/postedSince/'
+    );
   }
 
   getPosts(): Observable<PostResponse[]> {
@@ -44,12 +46,14 @@ export class CircleService {
    */
   getUser(userId: string): Observable<User> {
     return of(
-      new User(
-        'testUsername',
-        'firstname',
-        'lastname',
-        'https://material.angular.io/assets/img/examples/shiba1.jpg'
-      )
+      new User({
+        username: 'testUsername',
+        firstName: 'firstname',
+        lastName: 'lastname',
+        profilePictureURL:
+          'https://material.angular.io/assets/img/examples/shiba1.jpg',
+        createdAt: undefined,
+      })
     );
     // return this.http.get<User>(environment.apiUrl + userId)
   }

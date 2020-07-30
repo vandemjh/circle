@@ -28,7 +28,6 @@ export class PostResponse extends Element {
     super();
     // console.log(obj)
     if (!!!obj) {
-      Object.assign(this, undefined);
       return;
     }
     this.pid = obj.pid;

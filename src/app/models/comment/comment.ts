@@ -9,7 +9,4 @@ export class Comment extends Element {
     this.comment = obj.comment;
     this.commenter = obj.commenter;
   }
-  deserialize<Comment>(input: any): Comment {
-    return undefined;
-  }
 }
