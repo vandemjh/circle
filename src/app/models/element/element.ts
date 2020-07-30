@@ -1,5 +1,8 @@
-import { Deserializable } from '../deserializable/deserializable';
+import { Moment } from 'moment-timezone';
 
-export abstract class Element implements Deserializable {
-    abstract deserialize<Element>(input: any): Element;
+export class Element {
+  createdAt: Moment;
+  constructor(obj?: Element) {
+    Object.assign(this, obj);
+  }
 }

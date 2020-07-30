@@ -1,6 +1,11 @@
 <circle-header></circle-header>
-<circle-new-post-button [user]="this.user"></circle-new-post-button>
+<circle-new-post-button [user]="this.loggedInUser"></circle-new-post-button>
+<ng-template [ngIf]="this.newPosts">
+  <button class="refresh" mat-fab color="primary" (click)="this.getPosts()">
+    <mat-icon>refresh</mat-icon>
+  </button>
+</ng-template>
 <div *ngFor="let post of posts">
-    <circle-post [user]="this.user" [post]="post"></circle-post>
+  <circle-post [loggedInUser]="this.loggedInUser" [post]="post"></circle-post>
 </div>
 <div infiniteScroll [infiniteScrollDistance]="1" (scrolled)="onScroll()"></div>

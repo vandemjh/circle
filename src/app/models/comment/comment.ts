@@ -2,14 +2,14 @@ import { User } from '../user/user';
 import { Element } from '../element/element';
 
 export class Comment extends Element {
-    commenter: User;
-    comment: string;
-    constructor(commenter: User, comment: string) {
-        super();
-        this.comment = comment;
-        this.commenter = commenter;
-    }
-    deserialize<Comment>(input: any): Comment {
-        return undefined;
-    }
+  commenter: User;
+  comment: string;
+  constructor(obj?: Comment) {
+    super();
+    this.comment = obj.comment;
+    this.commenter = obj.commenter;
+  }
+  deserialize<Comment>(input: any): Comment {
+    return undefined;
+  }
 }

@@ -1,18 +1,11 @@
 import { Element } from '../element/element';
 
 export class User extends Element {
-    constructor(username?: string, firstName?: string, lastName?: string, profilePictureURL?: string) {
+    constructor(obj?: User) {
         super();
-        this.username = username;
-        this.firstName = firstName;
-        this.lastName = lastName;
-        this.profilePictureURL = profilePictureURL;
     }
     username: string;
     firstName: string;
     lastName: string;
     profilePictureURL: string;
-    deserialize<User>(input: any): User {
-        return undefined;
-    }
 }

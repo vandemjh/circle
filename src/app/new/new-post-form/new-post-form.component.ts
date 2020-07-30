@@ -1,4 +1,4 @@
-import { Component, OnInit, Input } from '@angular/core';
+import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 import { FormGroup, FormControl } from '@angular/forms';
 import { Post } from '../../models/post/post';
 import { CircleService } from '../../services/circle.service';
@@ -10,6 +10,7 @@ import { User } from 'src/app/models/user/user';
   styleUrls: ['./new-post-form.component.css'],
 })
 export class NewPostFormComponent implements OnInit {
+  @Output() submitted = new EventEmitter<boolean>();
   user: User;
   postForm = new FormGroup({
     poster: new FormControl(''),
@@ -30,6 +31,8 @@ export class NewPostFormComponent implements OnInit {
         [],
         []
         ))
-      .subscribe((x) => console.log(x));
+      .subscribe(res => {
+        this.submitted.emit(res);
+      });
   }
 }

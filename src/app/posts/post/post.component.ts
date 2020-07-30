@@ -13,7 +13,7 @@ export class PostComponent extends Post implements OnInit, OnChanges {
     /**
      * Logged in user
      */
-    @Input() user: User;
+    @Input() loggedInUser: User;
     @Input() post: Post;
     poster: User;
     favorited: boolean;
@@ -26,7 +26,7 @@ export class PostComponent extends Post implements OnInit, OnChanges {
     ngOnChanges(changes: SimpleChanges): void {
         if (changes.post.currentValue instanceof Post) {
             // console.log(Object.assign(this, changes.post.currentValue));
-            Object.assign(this, changes.post.currentValue);
+            this.deserialize(changes.post.currentValue);
         }
     }
 
@@ -41,8 +41,8 @@ export class PostComponent extends Post implements OnInit, OnChanges {
         return this.favorited;
     }
     toggleFavorited(): void {
-        if (!this.favorited) this.likes.push(this.user);
-        else this.likes.splice(this.likes.indexOf(this.user), 1);
+        if (!this.favorited) this.likes.push(this.loggedInUser);
+        else this.likes.splice(this.likes.indexOf(this.loggedInUser), 1);
         this.favorited = !this.favorited;
     }
     getNumberOfLikes(): number {

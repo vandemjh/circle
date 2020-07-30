@@ -12,7 +12,11 @@ export class NewPostButtonComponent implements OnInit {
     @Input() user: User;
     constructor(private dialog: MatDialog) {}
     openDialog(): void {
-        this.dialog.open(NewPostFormComponent).componentInstance.user = this.user;
+        var newPostForm = this.dialog.open(NewPostFormComponent);
+        newPostForm.componentInstance.user = new User().deserialize(this.user);
+        newPostForm.componentInstance.submitted.subscribe(closed => {
+            closed ? newPostForm.close() : null;
+        })
     }
 
     ngOnInit(): void {}
