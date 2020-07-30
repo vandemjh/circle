@@ -1,7 +1,7 @@
 import { Component, OnInit, Input } from "@angular/core";
 import { NewPostFormComponent } from "../new-post-form/new-post-form.component";
 import { MatDialog } from "@angular/material/dialog";
-import { User } from 'src/app/classes/user/user';
+import { User } from 'src/app/models/user/user';
 
 @Component({
     selector: "circle-new-post-button",

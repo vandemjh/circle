@@ -1,7 +1,6 @@
 import { User } from '../user/user';
 import { Comment } from '../comment/comment';
 import { Element } from '../element/element'
-import { deserialize, Type } from 'class-transformer';
 
 export class Post extends Element {
   constructor(
@@ -20,26 +19,22 @@ export class Post extends Element {
       this.comments = !!comments ? comments : [];
     this.likes = !!likes ? likes : [];
   }
-  deserialize(input: any): Post {
-    return deserialize<Post>(Post, JSON.stringify(input))
+  deserialize<Post>(input: any): Post {
+    return undefined
   }
   
   location: string;
   imageUrl: string;
   description: string;
   
-  @Type(() => User)
   poster: User;
-  @Type(() => Comment)
   comments: Comment[];
-  @Type(() => User)
   likes: User[];
 }
 
 export class PostResponse extends Element {
-  deserialize(input: any): PostResponse {
-    console.log(deserialize<PostResponse>(PostResponse, JSON.stringify(input)).post instanceof Post)
-    return deserialize<PostResponse>(PostResponse, JSON.stringify(input))
+  deserialize<PostResponse>(input: any): PostResponse {
+    return undefined;
   }
   pid: string;
   post: Post;

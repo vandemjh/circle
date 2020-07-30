@@ -1,5 +1,5 @@
 import { Component, OnInit, Input } from '@angular/core';
-import { Comment } from '../../classes/comment/comment';
+import { Comment } from '../../models/comment/comment';
 import { FormGroup, FormControl } from '@angular/forms';
 
 @Component({
