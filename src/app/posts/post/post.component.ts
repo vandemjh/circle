@@ -31,6 +31,7 @@ export class PostComponent implements OnInit, OnChanges {
 
     ngOnInit(): void {
         this.expanded = false;
+        // this.favorited = this.getNumberOfLikes();
     }
     
     toggleExpanded(): void {

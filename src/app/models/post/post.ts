@@ -10,20 +10,26 @@ export class Post extends Element {
     pid: string,
     cid: string,
     lid: string,
-    uid: string
+    uid: string,
+    location: string,
+    imageurl: string,
+    description: string
   ) {
     super(created);
     this.pid = pid;
     this.cid = cid;
     this.lid = lid;
     this.uid = uid;
+    this.location = location;
+    this.imageurl = imageurl;
+    this.description = description;
   }
   pid: string;
   cid: string;
   lid: string;
   uid: string;
   location: string;
-  imageUrl: string;
+  imageurl: string;
   description: string;
 
   poster: User;

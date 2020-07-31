@@ -5,20 +5,20 @@ export class User extends Element {
     created: string,
     uid: string,
     username: string,
-    firstName: string,
-    lastName: string,
+    firstname: string,
+    lastname: string,
     profilePictureURL: string
   ) {
     super(created);
     this.uid = uid;
     this.username = username;
-    this.firstName = firstName;
-    this.lastName = lastName;
+    this.firstname = firstname;
+    this.lastname = lastname;
     this.profilePictureURL = profilePictureURL;
   }
   uid: string;
   username: string;
-  firstName: string;
-  lastName: string;
+  firstname: string;
+  lastname: string;
   profilePictureURL: string;
 }

@@ -25,14 +25,15 @@ export class AppComponent implements OnInit {
     this.setUser();
     this.getPosts();
     interval(10000)
-    .pipe()
-    .subscribe((numberOfSeconds: number) => this.onInterval());
+      .pipe()
+      .subscribe((numberOfSeconds: number) => this.onInterval());
   }
 
   getPosts(): void {
     this.service.getPosts().subscribe((postResponse) => {
       postResponse.forEach((post) => {
-        this.posts.push(new Post(post.created.toString(), post.pid, post.cid, post.lid, post.uid));
+        // console.log(post instanceof Post)
+        this.posts.push(post);
       });
       this.posts.sort(Post.sort);
     });
@@ -52,7 +53,18 @@ export class AppComponent implements OnInit {
    * Assigns the current user to the one associated with the logged in user???
    */
   setUser(): void {
-    this.service.getUser('00c1e23e-4e7a-4596-962e-f38a9d58913e').subscribe((id) => (this.loggedInUser = id));
+    this.service
+      .getUser('543da15a-eb74-46ed-b96a-64f45ee0078a')
+      .subscribe((user) => {
+        this.loggedInUser = new User(
+          user.created.toString(),
+          user.uid,
+          user.username,
+          user.firstname,
+          user.lastname,
+          user.profilePictureURL
+        );
+      });
   }
 
   onScroll() {

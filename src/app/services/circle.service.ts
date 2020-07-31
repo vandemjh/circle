@@ -18,21 +18,29 @@ export class CircleService {
   }
 
   getNewestPosts(time: Moment): Observable<Post[]> {
-    return this.http.get<Post[]>(
-      environment.apiUrl + 'posts/postedSince/'
-    );
+    return this.http.get<Post[]>(environment.apiUrl + 'posts/postedSince/');
   }
 
   getPosts(): Observable<Post[]> {
-    return this.http.get<Post[]>(environment.apiUrl + 'posts').pipe(
-      map((result) => {
-        (result as Post[]).forEach((item: Post) => {
-          // console.log(item);
-          // item = new Post(item);
-        });
-        return result;
-      })
-    );
+    return this.http
+      .get<Post[]>(environment.apiUrl + 'posts')
+      .pipe(
+        map((result: Post[]) =>
+          result.map(
+            (item: Post) =>
+              new Post(
+                item.created.toString(),
+                item.pid,
+                item.cid,
+                item.lid,
+                item.uid,
+                item.location,
+                item.imageurl,
+                item.description
+              )
+          )
+        )
+      );
   }
 
   /**
@@ -40,6 +48,6 @@ export class CircleService {
    * @param uid to retreive user data from
    */
   getUser(uid: string): Observable<User> {
-    return this.http.get<User>(environment.apiUrl + "users/" + uid)
+    return this.http.get<User>(environment.apiUrl + 'users/' + uid);
   }
 }
