@@ -27,8 +27,8 @@ export class CircleService {
     return this.http.get<PostResponse[]>(environment.apiUrl + 'posts').pipe(
       map((result) => {
         (result as PostResponse[]).forEach((item: PostResponse) => {
-          item = new PostResponse(item);
           // console.log(item);
+          item = new PostResponse(item);
         });
         return result;
       })
@@ -52,7 +52,7 @@ export class CircleService {
         lastName: 'lastname',
         profilePictureURL:
           'https://material.angular.io/assets/img/examples/shiba1.jpg',
-        createdAt: undefined,
+        created: undefined,
       })
     );
     // return this.http.get<User>(environment.apiUrl + userId)

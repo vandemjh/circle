@@ -2,13 +2,13 @@ import { User } from '../user/user';
 import { Comment } from '../comment/comment';
 import { Element } from '../element/element';
 import { Moment } from 'moment-timezone';
+import * as moment from 'moment';
 
 export class Post extends Element {
   constructor(obj?: Post) {
-    super();
+    super(obj);
     if (!!!obj) return;
-    this.comments = [];
-    this.likes = [];
+    console.log(obj)
   }
   location: string;
   imageUrl: string;
@@ -17,22 +17,24 @@ export class Post extends Element {
   poster: User;
   comments: Comment[];
   likes: User[];
-
+  deserialize(obj: Post): Post {
+    return Object.assign(this, obj)
+  }
   static sort(a: Post, b: Post): number {
-    return a.createdAt.valueOf() - b.createdAt.valueOf();
+    if (!!!a) return -1;
+    if (!!!b) return 1;
+    return a.created.valueOf() - b.created.valueOf();
   }
 }
 
 export class PostResponse extends Element {
   constructor(obj?: PostResponse) {
-    super();
+    // console.log("At post:34")
+    super(obj);
     // console.log(obj)
-    if (!!!obj) {
-      return;
-    }
     this.pid = obj.pid;
-    this.post = obj.post;
-    this.createdAt = obj.createdAt;
+    this.post = new Post(obj.post);
+    // console.log(this.post)
   }
   pid: string;
   post: Post;

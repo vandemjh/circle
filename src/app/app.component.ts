@@ -32,6 +32,7 @@ export class AppComponent implements OnInit {
   getPosts(): void {
     this.service.getPosts().subscribe((postResponse) => {
       postResponse.forEach((post) => {
+        // console.log(post)
         this.posts.push(post.post);
         // console.log(post.post instanceof Post)
       });
@@ -42,7 +43,7 @@ export class AppComponent implements OnInit {
   onInterval(): void {
     if (!!this.posts[0])
       this.service
-        .getNewestPosts(this.posts[0].createdAt)
+        .getNewestPosts(this.posts[0].created)
         .subscribe((postResponse) => {
           this.newPosts = postResponse.length > 0;
           console.log(postResponse.length);

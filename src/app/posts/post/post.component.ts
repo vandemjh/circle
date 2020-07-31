@@ -27,8 +27,8 @@ export class PostComponent extends Post implements OnInit, OnChanges {
         // console.log(changes.post.currentValue)
         if (changes.post) {
             // console.log(Object.assign(this, changes.post.currentValue));
+            // console.log(changes.post.currentValue)
             this.deserialize(changes.post.currentValue);
-            console.log(changes.post.currentValue)
         }
     }
 

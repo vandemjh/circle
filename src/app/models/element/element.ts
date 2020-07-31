@@ -1,8 +1,9 @@
 import { Moment } from 'moment-timezone';
 
 export abstract class Element {
-  createdAt: Moment;
+  created: Moment;
+  // constructor();
   constructor(obj?: Element) {
-    return Object.assign(this, obj);
+    if (obj) this.created = obj.created;
   }
 }
