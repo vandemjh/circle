@@ -7,8 +7,8 @@ import * as moment from 'moment';
 export class Post extends Element {
   constructor(obj?: Post) {
     super(obj);
-    if (!!!obj) return;
-    console.log(obj)
+    this.comments = [];
+    this.likes = [];
   }
   location: string;
   imageUrl: string;
@@ -29,12 +29,9 @@ export class Post extends Element {
 
 export class PostResponse extends Element {
   constructor(obj?: PostResponse) {
-    // console.log("At post:34")
     super(obj);
-    // console.log(obj)
     this.pid = obj.pid;
     this.post = new Post(obj.post);
-    // console.log(this.post)
   }
   pid: string;
   post: Post;
