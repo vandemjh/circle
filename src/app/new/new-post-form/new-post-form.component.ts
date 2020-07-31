@@ -23,8 +23,19 @@ export class NewPostFormComponent implements OnInit {
   ngOnInit(): void {}
   onSubmit() {
     this.circleService
-      .submitPost(new Post())
-      .subscribe(res => {
+      .submitPost(
+        new Post(
+          null,
+          null,
+          null,
+          null,
+          null,
+          this.postForm.value.location,
+          this.postForm.value.imageUrl,
+          this.postForm.value.description
+        )
+      )
+      .subscribe((res) => {
         this.submitted.emit(res);
       });
   }

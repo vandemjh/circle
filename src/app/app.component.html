@@ -2,7 +2,7 @@
 <circle-new-post-button [user]="this.loggedInUser"></circle-new-post-button>
 <ng-template [ngIf]="this.newPosts">
   <button class="refresh" mat-fab color="primary" (click)="this.getPosts()">
-    <mat-icon>refresh</mat-icon>
+    <mat-chip>{{this.newPosts}} new posts</mat-chip>
   </button>
 </ng-template>
 <div *ngFor="let post of posts">

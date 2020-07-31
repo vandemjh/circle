@@ -6,4 +6,8 @@ export abstract class Element {
   constructor(created: string) {
     if (created) this.created = moment(created);
   }
+
+  getTimestamp(): string {
+    return this.created.toISOString();
+  }
 }

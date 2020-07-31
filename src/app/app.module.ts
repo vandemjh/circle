@@ -23,35 +23,37 @@ import { MatExpansionModule } from '@angular/material/expansion';
 import { MatInputModule } from '@angular/material/input';
 import { MatListModule } from '@angular/material/list';
 import { MatDialogModule } from '@angular/material/dialog';
+import { MatChipsModule } from '@angular/material/chips';
 
 @NgModule({
-    declarations: [
-        AppComponent,
-        HeaderComponent,
-        NewPostButtonComponent,
-        CommentsComponent,
-        PostComponent,
-        NewPostFormComponent,
-    ],
-    imports: [
-        BrowserModule,
-        AppRoutingModule,
-        BrowserAnimationsModule,
-        MatToolbarModule,
-        MatIconModule,
-        MatMenuModule,
-        MatCardModule,
-        MatButtonModule,
-        MatBadgeModule,
-        MatExpansionModule,
-        MatInputModule,
-        MatListModule,
-        MatDialogModule,
-        HttpClientModule,
-        ReactiveFormsModule,
-        InfiniteScrollModule,
-    ],
-    providers: [],
-    bootstrap: [AppComponent],
+  declarations: [
+    AppComponent,
+    HeaderComponent,
+    NewPostButtonComponent,
+    CommentsComponent,
+    PostComponent,
+    NewPostFormComponent,
+  ],
+  imports: [
+    BrowserModule,
+    AppRoutingModule,
+    BrowserAnimationsModule,
+    MatToolbarModule,
+    MatIconModule,
+    MatMenuModule,
+    MatCardModule,
+    MatButtonModule,
+    MatBadgeModule,
+    MatExpansionModule,
+    MatInputModule,
+    MatListModule,
+    MatDialogModule,
+    HttpClientModule,
+    ReactiveFormsModule,
+    InfiniteScrollModule,
+    MatChipsModule,
+  ],
+  providers: [],
+  bootstrap: [AppComponent],
 })
 export class AppModule {}

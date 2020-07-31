@@ -16,11 +16,11 @@ export class AppComponent implements OnInit {
    */
   loggedInUser: User;
   posts: Post[];
-  newPosts: boolean;
+  newPosts: number;
   constructor(private service: CircleService) {}
 
   ngOnInit(): void {
-    this.newPosts = false;
+    this.newPosts = 0;
     this.posts = [];
     this.setUser();
     this.getPosts();
@@ -31,10 +31,7 @@ export class AppComponent implements OnInit {
 
   getPosts(): void {
     this.service.getPosts().subscribe((postResponse) => {
-      postResponse.forEach((post) => {
-        // console.log(post instanceof Post)
-        this.posts.push(post);
-      });
+      this.posts.push(...postResponse);
       this.posts.sort(Post.sort);
     });
   }
@@ -42,11 +39,17 @@ export class AppComponent implements OnInit {
   onInterval(): void {
     if (!!this.posts[0])
       this.service
-        .getNewestPosts(this.posts[0].created)
+        .getPostsBefore(this.posts[0].created.format().toString())
         .subscribe((postResponse) => {
-          this.newPosts = postResponse.length > 0;
-          console.log(postResponse.length);
+          this.newPosts = postResponse.length;
         });
+  }
+
+  getNewPosts(): void {
+    this.service.getPostsBefore(this.posts[0].getTimestamp())
+    .subscribe((postResponse) => {
+      this.posts.push(...postResponse)
+    });
   }
 
   /**
@@ -54,7 +57,7 @@ export class AppComponent implements OnInit {
    */
   setUser(): void {
     this.service
-      .getUser('543da15a-eb74-46ed-b96a-64f45ee0078a')
+      .getUser('d1264eca-959d-40f2-822f-5e4673d81439')
       .subscribe((user) => {
         this.loggedInUser = new User(
           user.created.toString(),
@@ -68,6 +71,12 @@ export class AppComponent implements OnInit {
   }
 
   onScroll() {
-    this.getPosts();
+    this.service
+      .getPostsAfter(this.posts[this.posts.length - 1].getTimestamp())
+      .subscribe((postResponse) => {
+        this.posts.push(...postResponse);
+        this.posts.sort(Post.sort);
+      });
+      // console.log(this.posts)
   }
 }

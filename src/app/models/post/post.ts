@@ -37,8 +37,6 @@ export class Post extends Element {
   likes: User[];
 
   static sort(a: Post, b: Post): number {
-    if (!!!a) return -1;
-    if (!!!b) return 1;
-    return a.created.valueOf() - b.created.valueOf();
+    return b.created.valueOf() - a.created.valueOf();
   }
 }
