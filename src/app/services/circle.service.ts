@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { environment } from '../../environments/environment';
 import { HttpClient } from '@angular/common/http';
-import { Post, PostResponse } from '../models/post/post';
+import { Post } from '../models/post/post';
 import { Observable, of } from 'rxjs';
 import { User } from '../models/user/user';
 import { Comment } from '../models/comment/comment';
@@ -17,44 +17,29 @@ export class CircleService {
     return this.http.post<boolean>(environment.apiUrl + 'posts/', toPost);
   }
 
-  getNewestPosts(time: Moment): Observable<PostResponse[]> {
-    return this.http.get<PostResponse[]>(
+  getNewestPosts(time: Moment): Observable<Post[]> {
+    return this.http.get<Post[]>(
       environment.apiUrl + 'posts/postedSince/'
     );
   }
 
-  getPosts(): Observable<PostResponse[]> {
-    return this.http.get<PostResponse[]>(environment.apiUrl + 'posts').pipe(
+  getPosts(): Observable<Post[]> {
+    return this.http.get<Post[]>(environment.apiUrl + 'posts').pipe(
       map((result) => {
-        (result as PostResponse[]).forEach((item: PostResponse) => {
+        (result as Post[]).forEach((item: Post) => {
           // console.log(item);
-          item = new PostResponse(item);
+          // item = new Post(item);
         });
         return result;
       })
     );
   }
 
-  getUserId(userId: string): Observable<string> {
-    return of('testUserId');
-    // return this.http.get<string>(environment.apiUrl + userId);
-  }
-
   /**
-   * Returns user object from userId
-   * @param userId to retreive user data from
+   * Returns user object from uid
+   * @param uid to retreive user data from
    */
-  getUser(userId: string): Observable<User> {
-    return of(
-      new User({
-        username: 'testUsername',
-        firstName: 'firstname',
-        lastName: 'lastname',
-        profilePictureURL:
-          'https://material.angular.io/assets/img/examples/shiba1.jpg',
-        created: undefined,
-      })
-    );
-    // return this.http.get<User>(environment.apiUrl + userId)
+  getUser(uid: string): Observable<User> {
+    return this.http.get<User>(environment.apiUrl + "users/" + uid)
   }
 }

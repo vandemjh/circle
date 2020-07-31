@@ -9,7 +9,7 @@ import { User } from 'src/app/models/user/user';
     templateUrl: './post.component.html',
     styleUrls: ['./post.component.css'],
 })
-export class PostComponent extends Post implements OnInit, OnChanges {
+export class PostComponent implements OnInit, OnChanges {
     /**
      * Logged in user
      */
@@ -19,16 +19,13 @@ export class PostComponent extends Post implements OnInit, OnChanges {
     favorited: boolean;
     expanded: boolean;
 
-    constructor(private service: CircleService) {
-        super();
-    }
+    constructor(private service: CircleService) {}
     
     ngOnChanges(changes: SimpleChanges): void {
         // console.log(changes.post.currentValue)
         if (changes.post) {
-            // console.log(Object.assign(this, changes.post.currentValue));
-            // console.log(changes.post.currentValue)
-            this.deserialize(changes.post.currentValue);
+            Object.assign(this.post, changes.post.currentValue);
+            // console.log(this.post)
         }
     }
 
@@ -43,15 +40,16 @@ export class PostComponent extends Post implements OnInit, OnChanges {
         return this.favorited;
     }
     toggleFavorited(): void {
-        if (!this.favorited) this.likes.push(this.loggedInUser);
-        else this.likes.splice(this.likes.indexOf(this.loggedInUser), 1);
+        if (!this.favorited) this.post.likes.push(this.loggedInUser);
+        else this.post.likes.splice(this.post.likes.indexOf(this.loggedInUser), 1);
         this.favorited = !this.favorited;
     }
     getNumberOfLikes(): number {
-        return !!this.likes ? this.likes.length : 0;
+        return !!this.post.likes ? this.post.likes.length : 0;
     }
     getNumberOfComments(): number {
-        return this.comments.length;
+        return 0;
+        // return this.post.comments.length;
     }
     numberOfLikesHidden(): boolean {
         return this.getNumberOfLikes() <= 0;

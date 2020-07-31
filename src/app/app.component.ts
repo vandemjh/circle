@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { CircleService } from './services/circle.service';
-import { Post, PostResponse } from './models/post/post';
+import { Post } from './models/post/post';
 import { User } from './models/user/user';
 import { interval } from 'rxjs';
 
@@ -32,9 +32,7 @@ export class AppComponent implements OnInit {
   getPosts(): void {
     this.service.getPosts().subscribe((postResponse) => {
       postResponse.forEach((post) => {
-        // console.log(post)
-        this.posts.push(post.post);
-        // console.log(post.post instanceof Post)
+        this.posts.push(new Post(post.created.toString(), post.pid, post.cid, post.lid, post.uid));
       });
       this.posts.sort(Post.sort);
     });
@@ -54,7 +52,7 @@ export class AppComponent implements OnInit {
    * Assigns the current user to the one associated with the logged in user???
    */
   setUser(): void {
-    this.service.getUser('jack').subscribe((id) => (this.loggedInUser = id));
+    this.service.getUser('00c1e23e-4e7a-4596-962e-f38a9d58913e').subscribe((id) => (this.loggedInUser = id));
   }
 
   onScroll() {
