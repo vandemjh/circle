@@ -24,6 +24,9 @@ import { MatInputModule } from '@angular/material/input';
 import { MatListModule } from '@angular/material/list';
 import { MatDialogModule } from '@angular/material/dialog';
 import { MatChipsModule } from '@angular/material/chips';
+import { CallbackComponent } from './callback/callback/callback.component';
+import { OktaAuthGuard } from './guards/okta.guard';
+import { OktaAuthService } from './services/okta.service';
 
 @NgModule({
   declarations: [
@@ -33,6 +36,7 @@ import { MatChipsModule } from '@angular/material/chips';
     CommentsComponent,
     PostComponent,
     NewPostFormComponent,
+    CallbackComponent,
   ],
   imports: [
     BrowserModule,
@@ -53,7 +57,7 @@ import { MatChipsModule } from '@angular/material/chips';
     InfiniteScrollModule,
     MatChipsModule,
   ],
-  providers: [],
+  providers: [OktaAuthGuard, OktaAuthService],
   bootstrap: [AppComponent],
 })
 export class AppModule {}

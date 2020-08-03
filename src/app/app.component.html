@@ -1,4 +1,9 @@
 <circle-header></circle-header>
+
+<button routerLink="/"> Home </button>
+<button *ngIf="!isAuthenticated" (click)="oktaAuth.login()"> Login </button>
+<button *ngIf="isAuthenticated" (click)="oktaAuth.logout()"> Logout </button>
+
 <circle-new-post-button [user]="this.loggedInUser"></circle-new-post-button>
 <ng-template [ngIf]="this.newPosts">
   <button class="refresh" mat-fab color="primary" (click)="this.getPosts()">
@@ -9,3 +14,5 @@
   <circle-post [loggedInUser]="this.loggedInUser" [post]="post"></circle-post>
 </div>
 <div infiniteScroll [infiniteScrollDistance]="1" (scrolled)="onScroll()"></div>
+
+<router-outlet></router-outlet>

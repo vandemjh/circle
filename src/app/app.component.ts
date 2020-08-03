@@ -3,6 +3,7 @@ import { CircleService } from './services/circle.service';
 import { Post } from './models/post/post';
 import { User } from './models/user/user';
 import { interval } from 'rxjs';
+import {OktaAuthService} from './services/okta.service'
 
 @Component({
   selector: 'circle-root',
@@ -17,9 +18,14 @@ export class AppComponent implements OnInit {
   loggedInUser: User;
   posts: Post[];
   newPosts: number;
-  constructor(private service: CircleService) {}
+  isAuthenticated: boolean;
+  constructor(public oktaAuth: OktaAuthService, private service: CircleService) {}
 
   ngOnInit(): void {
+    this.oktaAuth.$isAuthenticated.subscribe(auth => {
+      console.log("Authenticated? : " + this.isAuthenticated)
+      this.isAuthenticated = auth});
+    
     this.newPosts = 0;
     this.posts = [];
     this.setUser();
@@ -57,7 +63,7 @@ export class AppComponent implements OnInit {
    */
   setUser(): void {
     this.service
-      .getUser('d1264eca-959d-40f2-822f-5e4673d81439')
+      .getUser('bfe6e19b-859e-4080-84d1-cf69fbea6451')
       .subscribe((user) => {
         this.loggedInUser = new User(
           user.created.toString(),
