@@ -24,6 +24,7 @@ import { MatInputModule } from '@angular/material/input';
 import { MatListModule } from '@angular/material/list';
 import { MatDialogModule } from '@angular/material/dialog';
 import { MatChipsModule } from '@angular/material/chips';
+import { HomeComponent } from './pages/home/home.component';
 
 @NgModule({
   declarations: [
@@ -33,6 +34,7 @@ import { MatChipsModule } from '@angular/material/chips';
     CommentsComponent,
     PostComponent,
     NewPostFormComponent,
+    HomeComponent,
   ],
   imports: [
     BrowserModule,
