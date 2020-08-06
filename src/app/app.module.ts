@@ -25,8 +25,6 @@ import { MatListModule } from '@angular/material/list';
 import { MatDialogModule } from '@angular/material/dialog';
 import { MatChipsModule } from '@angular/material/chips';
 import { CallbackComponent } from './callback/callback/callback.component';
-import { OktaAuthGuard } from './guards/okta.guard';
-import { OktaAuthService } from './services/okta.service';
 
 @NgModule({
   declarations: [
@@ -57,7 +55,7 @@ import { OktaAuthService } from './services/okta.service';
     InfiniteScrollModule,
     MatChipsModule,
   ],
-  providers: [OktaAuthGuard, OktaAuthService],
+  providers: [],
   bootstrap: [AppComponent],
 })
 export class AppModule {}

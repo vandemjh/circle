@@ -1,7 +1,6 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 import { CallbackComponent } from './callback/callback/callback.component';
-import { OktaAuthGuard } from './guards/okta.guard';
 import { AppComponent } from './app.component';
 
 const routes: Routes = [
@@ -9,7 +8,7 @@ const routes: Routes = [
   {
     path: '',
     component: AppComponent,
-    canActivate: [OktaAuthGuard],
+    // canActivate: [OktaAuthGuard],
   },
 ];
 
