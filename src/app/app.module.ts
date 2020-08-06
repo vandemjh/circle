@@ -24,7 +24,6 @@ import { MatInputModule } from '@angular/material/input';
 import { MatListModule } from '@angular/material/list';
 import { MatDialogModule } from '@angular/material/dialog';
 import { MatChipsModule } from '@angular/material/chips';
-import { CallbackComponent } from './callback/callback/callback.component';
 
 @NgModule({
   declarations: [
@@ -34,7 +33,6 @@ import { CallbackComponent } from './callback/callback/callback.component';
     CommentsComponent,
     PostComponent,
     NewPostFormComponent,
-    CallbackComponent,
   ],
   imports: [
     BrowserModule,
