@@ -19,7 +19,7 @@ export class HomeComponent implements OnInit {
   posts: Post[];
   newPosts: number;
   isAuthenticated: boolean;
-  constructor(public auth: AuthService, private service: CircleService) {}
+  constructor(private service: CircleService) {}
 
 
   ngOnInit(): void {

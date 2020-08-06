@@ -12,9 +12,7 @@ import { AuthService } from 'src/app/auth/auth.service';
 })
 export class AppComponent implements OnInit {
 
-  ngOnInit(): void {
-
-  }
-  constructor() { }
+  ngOnInit(): void {}
+  constructor(public auth: AuthService) { }
 
 }
