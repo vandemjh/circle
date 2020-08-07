@@ -25,6 +25,7 @@ import { MatListModule } from '@angular/material/list';
 import { MatDialogModule } from '@angular/material/dialog';
 import { MatChipsModule } from '@angular/material/chips';
 import { HomeComponent } from './pages/home/home.component';
+import {HttpInterceptorProviders} from './interceptors/http-interceptors'
 
 @NgModule({
   declarations: [
@@ -55,7 +56,7 @@ import { HomeComponent } from './pages/home/home.component';
     InfiniteScrollModule,
     MatChipsModule,
   ],
-  providers: [],
+  providers: [HttpInterceptorProviders],
   bootstrap: [AppComponent],
 })
 export class AppModule {}

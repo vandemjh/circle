@@ -23,6 +23,7 @@ export class HomeComponent implements OnInit {
 
 
   ngOnInit(): void {
+    // this.auth.getToken().subscribe(val => console.log(val))
     this.newPosts = 0;
     this.posts = [];
     this.setUser();

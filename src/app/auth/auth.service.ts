@@ -1,9 +1,13 @@
 /**
- * Taken from Auth0 Example.
+ * Adapted from the Auth0 Example.
  */
 
 import { Injectable } from '@angular/core';
-import createAuth0Client, { Auth0ClientOptions } from '@auth0/auth0-spa-js';
+import createAuth0Client, {
+  Auth0ClientOptions,
+  RedirectLoginResult,
+  GetTokenSilentlyOptions,
+} from '@auth0/auth0-spa-js';
 import Auth0Client from '@auth0/auth0-spa-js/dist/typings/Auth0Client';
 import {
   from,
@@ -12,27 +16,34 @@ import {
   BehaviorSubject,
   combineLatest,
   throwError,
+  ObservableInput,
 } from 'rxjs';
 import { tap, catchError, concatMap, shareReplay } from 'rxjs/operators';
 import { Router } from '@angular/router';
 import { HttpClient } from '@angular/common/http';
 import { environment } from 'src/environments/environment';
+import { CircleService } from '../services/circle.service';
 
 @Injectable({
   providedIn: 'root',
 })
 export class AuthService {
   config: Auth0ClientOptions;
+  static token: Promise<string>;
 
   // Create an observable of Auth0 instance of client, asynchronously pulls from secrets endpoint
-  auth0Client: Observable<Auth0Client> = from(
-    new Observable<Auth0Client>((observer) => {
-      this.http
-        .get<Auth0ClientOptions>(environment.apiUrl + 'secrets')
+  auth0Client: Observable<Auth0Client> = new Observable<Auth0Client>(
+    (observer) => {
+      this.service
+        .getSecrets()
         .toPromise()
         .then((obj: Auth0ClientOptions) => (this.config = obj))
-        .then(() => createAuth0Client(this.config).then((val: Auth0Client) => observer.next(val)));
-    })
+        .then(() =>
+          createAuth0Client(this.config).then((val: Auth0Client) =>
+            observer.next(val)
+          )
+        );
+    }
   ).pipe(
     shareReplay(1), // Every subscription receives the same shared value
     catchError((err) => throwError(err))
@@ -47,7 +58,13 @@ export class AuthService {
     tap((res) => (this.loggedIn = res))
   );
   handleRedirectCallback = this.auth0Client.pipe(
-    concatMap((client: Auth0Client) => from(client.handleRedirectCallback()))
+    concatMap((client: Auth0Client) => from(client.handleRedirectCallback())),
+    catchError(
+      (err, caught: Observable<RedirectLoginResult>): ObservableInput<any> => {
+        caught.subscribe((val) => console.log(err));
+        return of(err);
+      }
+    )
   );
   // Create subject and public observable of user profile data
   private userProfileSubject = new BehaviorSubject<any>(null);
@@ -55,12 +72,26 @@ export class AuthService {
   // Create a local property for login status
   loggedIn: boolean = null;
 
-  constructor(private router: Router, private http: HttpClient) {
+  constructor(private router: Router, private service: CircleService) {
     // On initial load, check authentication state with authorization server
     // Set up local auth streams if user is already authenticated
     this.localAuthSetup();
     // Handle redirect from Auth0 login
     this.handleAuthCallback();
+  }
+
+  /**
+   * Returns the current token in memory.
+   */
+  getToken(): Observable<string> {
+    return new Observable<string>((observer) =>
+      this.auth0Client.subscribe((client) =>
+        client.getTokenSilently().then((token) => {
+          AuthService.token = token;
+          observer.next(token);
+        })
+      )
+    );
   }
 
   // When calling, options can be passed if desired

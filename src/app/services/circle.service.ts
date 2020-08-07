@@ -7,6 +7,8 @@ import { User } from '../models/user/user';
 import { Comment } from '../models/comment/comment';
 import { map } from 'rxjs/operators';
 import { Moment } from 'moment-timezone';
+import { AuthService } from '../auth/auth.service';
+import { Auth0ClientOptions } from '@auth0/auth0-spa-js';
 
 @Injectable({
   providedIn: 'root',
@@ -15,6 +17,10 @@ export class CircleService {
   constructor(private http: HttpClient) {}
   submitPost(toPost: Post): Observable<boolean> {
     return this.http.post<boolean>(environment.apiUrl + 'posts/', toPost);
+  }
+
+  getSecrets(): Observable<Auth0ClientOptions> {
+    return this.http.get<Auth0ClientOptions>(environment.apiUrl + 'secrets')
   }
 
   getPostsBefore(time: string): Observable<Post[]> {
