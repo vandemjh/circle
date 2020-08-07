@@ -5,10 +5,10 @@ import { ReactiveFormsModule } from '@angular/forms';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
-import { HeaderComponent } from './header/header.component';
+import { HeaderComponent } from './components/header/header.component';
 import { NewPostButtonComponent } from './new/new-post-button/new-post-button.component';
-import { CommentsComponent } from './posts/comments/comments.component';
-import { PostComponent } from './posts/post/post.component';
+import { CommentsComponent } from './components/posts/comments/comments.component';
+import { PostComponent } from './components/posts/post/post.component';
 import { NewPostFormComponent } from './new/new-post-form/new-post-form.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { InfiniteScrollModule } from 'ngx-infinite-scroll';

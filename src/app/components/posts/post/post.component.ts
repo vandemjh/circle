@@ -1,6 +1,6 @@
 import { Component, OnInit, Input, OnChanges, SimpleChanges } from '@angular/core';
-import { Comment } from '../../models/comment/comment';
-import { Post } from '../../models/post/post';
+import { Comment } from '../../../models/comment/comment';
+import { Post } from '../../../models/post/post';
 import { CircleService } from 'src/app/services/circle.service';
 import { User } from 'src/app/models/user/user';
 
