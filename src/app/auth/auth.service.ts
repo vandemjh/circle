@@ -5,7 +5,6 @@
 import { Injectable } from '@angular/core';
 import createAuth0Client, { Auth0ClientOptions } from '@auth0/auth0-spa-js';
 import Auth0Client from '@auth0/auth0-spa-js/dist/typings/Auth0Client';
-// import * as config from '../../../auth_config.json';
 import {
   from,
   of,
