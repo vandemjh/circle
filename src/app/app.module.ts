@@ -26,6 +26,7 @@ import { MatDialogModule } from '@angular/material/dialog';
 import { MatChipsModule } from '@angular/material/chips';
 import { HomeComponent } from './pages/home/home.component';
 import {HttpInterceptorProviders} from './interceptors/http-interceptors'
+import { FlexLayoutModule } from '@angular/flex-layout';
 
 @NgModule({
   declarations: [
@@ -55,6 +56,7 @@ import {HttpInterceptorProviders} from './interceptors/http-interceptors'
     ReactiveFormsModule,
     InfiniteScrollModule,
     MatChipsModule,
+    FlexLayoutModule
   ],
   providers: [HttpInterceptorProviders],
   bootstrap: [AppComponent],

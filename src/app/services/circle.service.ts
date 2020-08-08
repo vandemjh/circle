@@ -20,25 +20,29 @@ export class CircleService {
   }
 
   getSecrets(): Observable<Auth0ClientOptions> {
-    return this.http.get<Auth0ClientOptions>(environment.apiUrl + 'secrets')
+    return this.http.get<Auth0ClientOptions>(environment.apiUrl + 'secrets');
   }
 
   getPostsBefore(time: string): Observable<Post[]> {
-    return this.http.get<Post[]>(
-      environment.apiUrl + 'posts/postedBefore/' + time
-    ).pipe(CircleService.deserialize());
+    return this.http
+      .get<Post[]>(environment.apiUrl + 'posts/postedBefore/' + time)
+      .pipe(CircleService.deserialize());
   }
 
   getPostsAfter(time: string): Observable<Post[]> {
-    return this.http.get<Post[]>(
-      environment.apiUrl + 'posts/postedAfter/' + time
-    ).pipe(CircleService.deserialize());
+    return this.http
+      .get<Post[]>(environment.apiUrl + 'posts/postedAfter/' + time)
+      .pipe(CircleService.deserialize());
   }
 
   getPosts(): Observable<Post[]> {
     return this.http
       .get<Post[]>(environment.apiUrl + 'posts')
       .pipe(CircleService.deserialize());
+  }
+
+  login(obj: object): Observable<string> {
+    return this.http.post<string>(environment.apiUrl + 'login', obj);
   }
 
   /**

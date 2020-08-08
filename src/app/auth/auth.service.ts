@@ -23,13 +23,14 @@ import { Router } from '@angular/router';
 import { HttpClient } from '@angular/common/http';
 import { environment } from 'src/environments/environment';
 import { CircleService } from '../services/circle.service';
+import { User } from '../models/user/user';
 
 @Injectable({
   providedIn: 'root',
 })
 export class AuthService {
   config: Auth0ClientOptions;
-  static token: Promise<string>;
+  public static user: User;
 
   // Create an observable of Auth0 instance of client, asynchronously pulls from secrets endpoint
   auth0Client: Observable<Auth0Client> = new Observable<Auth0Client>(
@@ -86,10 +87,7 @@ export class AuthService {
   getToken(): Observable<string> {
     return new Observable<string>((observer) =>
       this.auth0Client.subscribe((client) =>
-        client.getTokenSilently().then((token) => {
-          AuthService.token = token;
-          observer.next(token);
-        })
+        client.getTokenSilently().then((token) => observer.next(token))
       )
     );
   }
@@ -141,6 +139,9 @@ export class AuthService {
       const authComplete = this.handleRedirectCallback.pipe(
         // Have client, now call method to handle auth callback redirect
         tap((cbRes) => {
+          // Login to backend
+          console.log("set logged in user here")
+          this.getUser().subscribe(u => this.service.login(u));
           // Get and set target redirect route from callback results
           targetRoute =
             cbRes.appState && cbRes.appState.target

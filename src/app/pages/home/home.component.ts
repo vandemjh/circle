@@ -29,8 +29,7 @@ export class HomeComponent implements OnInit {
     this.setUser();
     this.getPosts();
     interval(10000)
-      .pipe()
-      .subscribe((numberOfSeconds: number) => this.onInterval());
+      .subscribe(() => this.onInterval());
   }
 
 
@@ -62,7 +61,7 @@ export class HomeComponent implements OnInit {
    */
   setUser(): void {
     this.service
-      .getUser('687673b4-dcc9-4546-a1d9-6a97bbe54326')
+      .getUser('21dda94c-c87b-46e0-b020-01d56bf0d86c')
       .subscribe((user) => {
         this.loggedInUser = new User(
           user.created.toString(),
