@@ -29,7 +29,9 @@ import { User } from '../models/user/user';
 })
 export class AuthService {
   config: Auth0ClientOptions;
-  public static loggedInUser: Subject<User> = new Subject<User>();
+  private static userBehaviorSubject: BehaviorSubject<User> = new BehaviorSubject<User>(
+    null
+  );
 
   // Create an observable of Auth0 instance of client, asynchronously pulls from secrets endpoint
   auth0Client: Observable<Auth0Client> = new Observable<Auth0Client>(
@@ -38,10 +40,14 @@ export class AuthService {
         .getSecrets()
         .toPromise()
         .then((obj: Auth0ClientOptions) => (this.config = obj))
+        .catch((err) => throwError(err))
         .then(() =>
-          createAuth0Client(this.config).then((val: Auth0Client) =>
-            observer.next(val)
-          )
+          createAuth0Client(this.config)
+            .then((val: Auth0Client) => {
+              observer.next(val);
+              observer.complete();
+            })
+            .catch((err) => throwError(err))
         );
     }
   ).pipe(
@@ -67,7 +73,9 @@ export class AuthService {
     )
   );
   // Create subject and public observable of user profile data
-  private userProfileSubject = new BehaviorSubject<any>(null);
+  private userProfileSubject: BehaviorSubject<any> = new BehaviorSubject<any>(
+    null
+  );
   userProfile = this.userProfileSubject.asObservable();
   // Create a local property for login status
   loggedIn: boolean = null;
@@ -130,6 +138,10 @@ export class AuthService {
     });
   }
 
+  public static getLoggedInUser(): Observable<User> {
+    return AuthService.userBehaviorSubject.asObservable();
+  }
+
   private handleAuthCallback() {
     // Call when app reloads after user logs in with Auth0
     const params = window.location.search;
@@ -143,7 +155,7 @@ export class AuthService {
           this.getUser().subscribe((u) =>
             this.service
               .login(u)
-              .subscribe((user: User) => AuthService.loggedInUser.next(user))
+              .subscribe((user: User) => AuthService.userBehaviorSubject.next(user))
           );
           // Get and set target redirect route from callback results
           targetRoute =

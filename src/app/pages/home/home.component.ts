@@ -15,7 +15,7 @@ export class HomeComponent implements OnInit {
   /**
    * Logged in user.
    */
-  loggedInUser: User;
+  user: User;
   posts: Post[];
   newPosts: number;
   isAuthenticated: boolean;
@@ -58,9 +58,8 @@ export class HomeComponent implements OnInit {
    * Assigns the current user to the one associated with the logged in user
    */
   setUser(): void {
-    AuthService.loggedInUser
-      .asObservable()
-      .subscribe((user: User) => (this.loggedInUser = user));
+    AuthService.getLoggedInUser()
+      .subscribe((user: User) => (this.user = user));
   }
 
   onScroll() {
