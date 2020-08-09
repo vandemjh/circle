@@ -18,6 +18,7 @@ import {
   throwError,
   ObservableInput,
   Subject,
+  ReplaySubject,
 } from 'rxjs';
 import { tap, catchError, concatMap, shareReplay } from 'rxjs/operators';
 import { Router } from '@angular/router';
@@ -29,9 +30,9 @@ import { User } from '../models/user/user';
 })
 export class AuthService {
   config: Auth0ClientOptions;
-  private static userBehaviorSubject: BehaviorSubject<User> = new BehaviorSubject<User>(
-    null
-  );
+  private static userReplaySubject: ReplaySubject<User> = new ReplaySubject<
+    User
+  >(1);
 
   // Create an observable of Auth0 instance of client, asynchronously pulls from secrets endpoint
   auth0Client: Observable<Auth0Client> = new Observable<Auth0Client>(
@@ -43,9 +44,11 @@ export class AuthService {
         .catch((err) => throwError(err))
         .then(() =>
           createAuth0Client(this.config)
-            .then((val: Auth0Client) => {
-              observer.next(val);
-              observer.complete();
+            .then((client: Auth0Client) => {
+              observer.next(client);
+              client
+                .getUser()
+                .then((u) => AuthService.userReplaySubject.next(u));
             })
             .catch((err) => throwError(err))
         );
@@ -139,7 +142,7 @@ export class AuthService {
   }
 
   public static getLoggedInUser(): Observable<User> {
-    return AuthService.userBehaviorSubject.asObservable();
+    return AuthService.userReplaySubject.asObservable();
   }
 
   private handleAuthCallback() {
@@ -155,7 +158,9 @@ export class AuthService {
           this.getUser().subscribe((u) =>
             this.service
               .login(u)
-              .subscribe((user: User) => AuthService.userBehaviorSubject.next(user))
+              .subscribe((user: User) =>
+                AuthService.userReplaySubject.next(user)
+              )
           );
           // Get and set target redirect route from callback results
           targetRoute =

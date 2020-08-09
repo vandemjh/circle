@@ -56,10 +56,11 @@ export class HomeComponent implements OnInit {
 
   /**
    * Assigns the current user to the one associated with the logged in user
+   * Cannot flow down from app.component because this page is inside the
+   * router-outlet
    */
   setUser(): void {
-    AuthService.getLoggedInUser()
-      .subscribe((user: User) => (this.user = user));
+    AuthService.getLoggedInUser().subscribe((user: User) => (this.user = user));
   }
 
   onScroll() {

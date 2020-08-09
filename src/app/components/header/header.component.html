@@ -1,5 +1,11 @@
 <mat-toolbar>
-    <span>Circle</span>
-    <span class="fill-space"></span>
-    <button mat-icon-button (click)="this.toggleSidenav()"></button>
+  <span>Circle</span>
+  <span class="fill-space"></span>
+  <ng-template [ngIf]="!!this.user">
+    <button
+      mat-fab
+      [style.backgroundImage]="'url(' + this.user.picture + ')'"
+      (click)="this.toggleSidenav()"
+    ></button>
+  </ng-template>
 </mat-toolbar>

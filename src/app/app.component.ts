@@ -1,5 +1,7 @@
-import { Component, OnInit, ElementRef, ViewChild } from '@angular/core';
+import { Component, OnInit, Output, EventEmitter } from '@angular/core';
 import { AuthService } from 'src/app/auth/auth.service';
+import { User } from './models/user/user';
+import { Observable } from 'rxjs';
 
 @Component({
   selector: 'circle-root',
@@ -7,7 +9,10 @@ import { AuthService } from 'src/app/auth/auth.service';
   styleUrls: ['./app.component.css'],
 })
 export class AppComponent implements OnInit {
-  ngOnInit(): void { }
-  constructor(public auth: AuthService) { }
+  user: User;
 
+  ngOnInit(): void {}
+  constructor(public auth: AuthService) {
+    AuthService.getLoggedInUser().subscribe((user) => (this.user = user));
+  }
 }

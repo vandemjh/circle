@@ -1,8 +1,8 @@
-<!-- <button routerLink="/">Home</button>
-    <button (click)="auth.login()">Login</button>
-    <button (click)="auth.logout()">Logout</button> -->
+<button routerLink="/">Home</button>
+<button (click)="this.auth.login()">Login</button>
+<button (click)="this.auth.logout()">Logout</button>
 
-<circle-header #header></circle-header>
+<circle-header [user]="this.user" #header></circle-header>
 
 <mat-sidenav-container mode="side" hasBackdrop="false">
   <mat-sidenav
