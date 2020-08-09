@@ -1,7 +1,3 @@
-<button routerLink="/">Home</button>
-<button (click)="this.auth.login()">Login</button>
-<button (click)="this.auth.logout()">Logout</button>
-
 <circle-header [user]="this.user" #header></circle-header>
 
 <mat-sidenav-container mode="side" hasBackdrop="false">
@@ -10,8 +6,11 @@
     [fixedTopGap]="56"
     [position]="'end'"
     [opened]="header.sidenavOpen"
-    >asdf</mat-sidenav
   >
+    <button routerLink="/">Home</button>
+    <button (click)="this.auth.login()">Login</button>
+    <button (click)="this.auth.logout()">Logout</button>
+  </mat-sidenav>
   <mat-sidenav-content>
     <router-outlet></router-outlet>
   </mat-sidenav-content>
