@@ -13,7 +13,7 @@ export class PostComponent implements OnInit, OnChanges {
     /**
      * Logged in user
      */
-    @Input() loggedInUser: User;
+    @Input() user: User;
     @Input() post: Post;
     poster: User;
     favorited: boolean;
@@ -41,8 +41,8 @@ export class PostComponent implements OnInit, OnChanges {
         return this.favorited;
     }
     toggleFavorited(): void {
-        if (!this.favorited) this.post.likes.push(this.loggedInUser);
-        else this.post.likes.splice(this.post.likes.indexOf(this.loggedInUser), 1);
+        if (!this.favorited) this.post.likes.push(this.user);
+        else this.post.likes.splice(this.post.likes.indexOf(this.user), 1);
         this.favorited = !this.favorited;
     }
     getNumberOfLikes(): number {

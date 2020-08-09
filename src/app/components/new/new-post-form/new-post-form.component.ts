@@ -1,7 +1,7 @@
 import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 import { FormGroup, FormControl } from '@angular/forms';
-import { Post } from '../../models/post/post';
-import { CircleService } from '../../services/circle.service';
+import { Post } from '../../../models/post/post';
+import { CircleService } from '../../../services/circle.service';
 import { User } from 'src/app/models/user/user';
 
 @Component({
