@@ -17,11 +17,10 @@ import {
   combineLatest,
   throwError,
   ObservableInput,
+  Subject,
 } from 'rxjs';
 import { tap, catchError, concatMap, shareReplay } from 'rxjs/operators';
 import { Router } from '@angular/router';
-import { HttpClient } from '@angular/common/http';
-import { environment } from 'src/environments/environment';
 import { CircleService } from '../services/circle.service';
 import { User } from '../models/user/user';
 
@@ -30,7 +29,7 @@ import { User } from '../models/user/user';
 })
 export class AuthService {
   config: Auth0ClientOptions;
-  public static user: User;
+  public static loggedInUser: Subject<User> = new Subject<User>();
 
   // Create an observable of Auth0 instance of client, asynchronously pulls from secrets endpoint
   auth0Client: Observable<Auth0Client> = new Observable<Auth0Client>(
@@ -94,7 +93,7 @@ export class AuthService {
 
   // When calling, options can be passed if desired
   // https://auth0.github.io/auth0-spa-js/classes/auth0client.html#getuser
-  getUser(options?): Observable<any> {
+  private getUser(options?): Observable<any> {
     return this.auth0Client.pipe(
       concatMap((client: Auth0Client) => from(client.getUser(options))),
       tap((user) => this.userProfileSubject.next(user))
@@ -140,8 +139,12 @@ export class AuthService {
         // Have client, now call method to handle auth callback redirect
         tap((cbRes) => {
           // Login to backend
-          console.log("set logged in user here")
-          this.getUser().subscribe(u => this.service.login(u));
+          // console.log('set logged in user here');
+          this.getUser().subscribe((u) =>
+            this.service
+              .login(u)
+              .subscribe((user: User) => AuthService.loggedInUser.next(user))
+          );
           // Get and set target redirect route from callback results
           targetRoute =
             cbRes.appState && cbRes.appState.target

@@ -8,7 +8,7 @@ import { interval } from 'rxjs';
 @Component({
   selector: 'circle-home',
   templateUrl: './home.component.html',
-  styleUrls: ['./home.component.css']
+  styleUrls: ['./home.component.css'],
 })
 export class HomeComponent implements OnInit {
   title = 'Circle';
@@ -21,17 +21,14 @@ export class HomeComponent implements OnInit {
   isAuthenticated: boolean;
   constructor(private service: CircleService) {}
 
-
   ngOnInit(): void {
     // this.auth.getToken().subscribe(val => console.log(val))
     this.newPosts = 0;
     this.posts = [];
     this.setUser();
     this.getPosts();
-    interval(10000)
-      .subscribe(() => this.onInterval());
+    interval(10000).subscribe(() => this.onInterval());
   }
-
 
   getPosts(): void {
     this.service.getPosts().subscribe((postResponse) => {
@@ -50,28 +47,20 @@ export class HomeComponent implements OnInit {
   }
 
   getNewPosts(): void {
-    this.service.getPostsBefore(this.posts[0].getTimestamp())
-    .subscribe((postResponse) => {
-      this.posts.push(...postResponse)
-    });
+    this.service
+      .getPostsBefore(this.posts[0].getTimestamp())
+      .subscribe((postResponse) => {
+        this.posts.push(...postResponse);
+      });
   }
 
   /**
-   * Assigns the current user to the one associated with the logged in user???
+   * Assigns the current user to the one associated with the logged in user
    */
   setUser(): void {
-    this.service
-      .getUser('21dda94c-c87b-46e0-b020-01d56bf0d86c')
-      .subscribe((user) => {
-        this.loggedInUser = new User(
-          user.created.toString(),
-          user.uid,
-          user.username,
-          user.firstname,
-          user.lastname,
-          user.profilePictureURL
-        );
-      });
+    AuthService.loggedInUser
+      .asObservable()
+      .subscribe((user: User) => (this.loggedInUser = user));
   }
 
   onScroll() {
@@ -81,9 +70,6 @@ export class HomeComponent implements OnInit {
         this.posts.push(...postResponse);
         this.posts.sort(Post.sort);
       });
-      // console.log(this.posts)
+    // console.log(this.posts)
   }
-
-  
-
 }
