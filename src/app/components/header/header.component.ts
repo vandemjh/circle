@@ -6,7 +6,13 @@ import { Component, OnInit } from "@angular/core";
     styleUrls: ["./header.component.css"],
 })
 export class HeaderComponent implements OnInit {
+    sidenavOpen: boolean = false;
     constructor() {}
 
-    ngOnInit(): void {}
+    ngOnInit(): void {
+        console.log()
+    }
+    toggleSidenav(): void {
+        this.sidenavOpen = !this.sidenavOpen;
+    }
 }

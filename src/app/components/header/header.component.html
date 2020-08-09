@@ -1,12 +1,5 @@
 <mat-toolbar>
     <span>Circle</span>
-    <!-- <mat-menu #appMenu="appMenu">
-        <button mat-menu-item>Account</button>
-        <button mat-menu-item>Settings</button>
-    </mat-menu> -->
     <span class="fill-space"></span>
-    <button mat-icon-button>
-        <!-- [matMenuTriggerFor]="appMenu" -->
-        <mat-icon>more_vert</mat-icon>
-    </button>
+    <button mat-icon-button (click)="this.toggleSidenav()"></button>
 </mat-toolbar>

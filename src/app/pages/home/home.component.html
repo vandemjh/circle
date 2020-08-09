@@ -1,12 +1,12 @@
+    <ng-template [ngIf]="this.newPosts">
+      <div fxLayout="row" fxLayoutAlign="center">
+        <button mat-raised-button color="primary" (click)="this.getNewPosts()">
+          {{ this.newPosts }} new posts
+        </button>
+      </div>
+    </ng-template>
+    <div *ngFor="let post of posts">
+      <circle-post [user]="this.user" [post]="post"></circle-post>
+    </div>
 <circle-new-post-button [user]="this.user"></circle-new-post-button>
-<ng-template [ngIf]="this.newPosts">
-  <div fxLayout="row" fxLayoutAlign="center">
-    <button mat-raised-button color="primary" (click)="this.getNewPosts()">
-      {{ this.newPosts }} new posts
-    </button>
-  </div>
-</ng-template>
-<div *ngFor="let post of posts">
-  <circle-post [user]="this.user" [post]="post"></circle-post>
-</div>
 <div infiniteScroll [infiniteScrollDistance]="1" (scrolled)="onScroll()"></div>

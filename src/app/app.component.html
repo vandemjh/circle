@@ -1,7 +1,18 @@
-<circle-header></circle-header>
+<!-- <button routerLink="/">Home</button>
+    <button (click)="auth.login()">Login</button>
+    <button (click)="auth.logout()">Logout</button> -->
 
-<button routerLink="/"> Home </button>
-<button (click)="auth.login()"> Login </button>
-<button (click)="auth.logout()"> Logout </button>
-<router-outlet></router-outlet>
+<circle-header #header></circle-header>
 
+<mat-sidenav-container mode="side" hasBackdrop="false">
+  <mat-sidenav
+    [fixedInViewport]="true"
+    [fixedTopGap]="56"
+    [position]="'end'"
+    [opened]="header.sidenavOpen"
+    >asdf</mat-sidenav
+  >
+  <mat-sidenav-content>
+    <router-outlet></router-outlet>
+  </mat-sidenav-content>
+</mat-sidenav-container>

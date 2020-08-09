@@ -27,6 +27,7 @@ import { MatChipsModule } from '@angular/material/chips';
 import { HomeComponent } from './pages/home/home.component';
 import {HttpInterceptorProviders} from './interceptors/http-interceptors'
 import { FlexLayoutModule } from '@angular/flex-layout';
+import {MatSidenavModule} from '@angular/material/sidenav';
 
 @NgModule({
   declarations: [
@@ -56,7 +57,8 @@ import { FlexLayoutModule } from '@angular/flex-layout';
     ReactiveFormsModule,
     InfiniteScrollModule,
     MatChipsModule,
-    FlexLayoutModule
+    FlexLayoutModule,
+    MatSidenavModule
   ],
   providers: [HttpInterceptorProviders],
   bootstrap: [AppComponent],
