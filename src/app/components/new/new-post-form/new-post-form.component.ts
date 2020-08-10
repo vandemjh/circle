@@ -11,6 +11,9 @@ import { FormGroup, FormControl } from '@angular/forms';
 import { Post } from '../../../models/post/post';
 import { CircleService } from '../../../services/circle.service';
 import { User } from 'src/app/models/user/user';
+import { environment } from 'src/environments/environment';
+import { formatDate } from '@angular/common';
+import {Response} from '../../../models/response/response'
 
 @Component({
   selector: 'circle-new-post-form',
@@ -30,22 +33,36 @@ export class NewPostFormComponent implements OnInit {
 
   ngOnInit(): void {}
 
+  fileChange(event) {
+    if (event.target.files.length > 0) {
+      const file = event.target.files[0];
+      this.postForm.get('image').setValue(file);
+    }
+  }
+
   onSubmit() {
+    var formData = new FormData();
+    formData.append('image', this.postForm.get('image').value);
+
     this.circleService
-      .submitPost(
-        new Post(
-          undefined,
-          undefined,
-          undefined,
-          undefined,
-          this.user.uid,
-          this.postForm.value.location,
-          this.postForm.value.image,
-          this.postForm.value.description
-        )
-      )
-      .subscribe((res) => {
-        this.submitted.emit(res);
+      .upload(formData)
+      .subscribe((url: Response<string>) => {
+        this.circleService
+          .submitPost(
+            new Post(
+              undefined,
+              undefined,
+              undefined,
+              undefined,
+              this.user.uid,
+              this.postForm.value.location,
+              environment.apiUrl + url.payload,
+              this.postForm.value.description
+            )
+          )
+          .subscribe((res) => {
+            this.submitted.emit(res);
+          });
       });
   }
 }

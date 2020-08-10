@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { environment } from '../../environments/environment';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpEventType } from '@angular/common/http';
 import { Post } from '../models/post/post';
 import { Observable, of, OperatorFunction } from 'rxjs';
 import { User } from '../models/user/user';
@@ -9,6 +9,7 @@ import { map } from 'rxjs/operators';
 import { Moment } from 'moment-timezone';
 import { AuthService } from '../auth/auth.service';
 import { Auth0ClientOptions } from '@auth0/auth0-spa-js';
+import {Response} from '../models/response/response'
 
 @Injectable({
   providedIn: 'root',
@@ -59,6 +60,27 @@ export class CircleService {
    */
   getUserBySub(sub: string): Observable<User> {
     return this.http.get<User>(environment.apiUrl + 'users/sub/' + sub);
+  }
+
+  upload(data): Observable<Response<string>> {
+    return this.http
+      .post<any>(`${environment.apiUrl}upload`, data, {
+        reportProgress: true,
+        observe: 'events',
+      })
+      .pipe(
+        map((event) => {
+          switch (event.type) {
+            case HttpEventType.UploadProgress:
+              const progress = Math.round((100 * event.loaded) / event.total);
+              return { status: 'progress', message: progress };
+            case HttpEventType.Response:
+              return event.body;
+            default:
+              return `Unhandled event: ${event.type}`;
+          }
+        })
+      );
   }
 
   private static deserialize(): OperatorFunction<Post[], Post[]> {
