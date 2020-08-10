@@ -4,6 +4,7 @@ import { AppComponent } from './app.component';
 import { AuthGuard } from './auth/auth.guard';
 import { ProfileComponent } from './pages/profile/profile.component';
 import { HomeComponent } from './pages/home/home.component';
+import { LoginComponent } from './pages/login/login.component';
 
 const routes: Routes = [
   {
@@ -16,6 +17,10 @@ const routes: Routes = [
     component: HomeComponent,
     pathMatch: 'full',
     canActivate: [AuthGuard],
+  },
+  {
+    path: 'login',
+    component: LoginComponent
   }
 ];
 

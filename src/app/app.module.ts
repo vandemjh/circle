@@ -28,6 +28,7 @@ import { HomeComponent } from './pages/home/home.component';
 import {HttpInterceptorProviders} from './interceptors/http-interceptors'
 import { FlexLayoutModule } from '@angular/flex-layout';
 import {MatSidenavModule} from '@angular/material/sidenav';
+import { LoginComponent } from './pages/login/login.component';
 
 @NgModule({
   declarations: [
@@ -38,6 +39,7 @@ import {MatSidenavModule} from '@angular/material/sidenav';
     PostComponent,
     NewPostFormComponent,
     HomeComponent,
+    LoginComponent,
   ],
   imports: [
     BrowserModule,
