@@ -4,6 +4,7 @@ import {
   Input,
   OnChanges,
   SimpleChanges,
+  EventEmitter,
 } from '@angular/core';
 import { User } from 'src/app/models/user/user';
 import { AuthService } from 'src/app/auth/auth.service';

@@ -31,6 +31,7 @@ import { MatSidenavModule } from '@angular/material/sidenav';
 import { LoginComponent } from './pages/login/login.component';
 import { NotFoundComponent } from './pages/not-found/not-found.component';
 import { ProfileComponent } from './pages/profile/profile.component';
+import { LogoutComponent } from './pages/logout/logout.component';
 
 @NgModule({
   declarations: [
@@ -44,6 +45,7 @@ import { ProfileComponent } from './pages/profile/profile.component';
     LoginComponent,
     NotFoundComponent,
     ProfileComponent,
+    LogoutComponent,
   ],
   imports: [
     BrowserModule,

@@ -23,7 +23,7 @@ export class NewPostFormComponent implements OnInit {
   postForm = new FormGroup({
     poster: new FormControl(''),
     location: new FormControl(''),
-    imageUrl: new FormControl(''),
+    image: new FormControl(''),
     description: new FormControl(''),
   });
   constructor(private circleService: CircleService) {}
@@ -40,7 +40,7 @@ export class NewPostFormComponent implements OnInit {
           undefined,
           this.user.uid,
           this.postForm.value.location,
-          this.postForm.value.imageUrl,
+          this.postForm.value.image,
           this.postForm.value.description
         )
       )

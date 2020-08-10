@@ -1,5 +1,7 @@
 <mat-toolbar>
-  <span>Circle</span>
+  <a [routerLink]="['/']">
+    <span>Circle</span>
+  </a>
   <span class="fill-space"></span>
   <ng-template [ngIf]="!!this.user">
     <button
@@ -7,7 +9,6 @@
       (click)="this.toggleSidenav()"
       [style.background-image]="'url(' + this.user.picture + ')'"
       class="profilepic"
-      >
-    </button>
+    ></button>
   </ng-template>
 </mat-toolbar>
