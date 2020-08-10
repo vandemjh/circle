@@ -22,12 +22,11 @@ export class HomeComponent implements OnInit {
   constructor(private service: CircleService) {}
 
   ngOnInit(): void {
-    // this.auth.getToken().subscribe(val => console.log(val))
     this.newPosts = 0;
     this.posts = [];
     this.setUser();
     this.getPosts();
-    interval(10000).subscribe(() => this.onInterval());
+    interval(10000).subscribe(() => this.checkForNewPosts());
   }
 
   getPosts(): void {
@@ -37,10 +36,10 @@ export class HomeComponent implements OnInit {
     });
   }
 
-  onInterval(): void {
+  checkForNewPosts(): void {
     if (!!this.posts[0])
       this.service
-        .getPostsBefore(this.posts[0].created.format().toString())
+        .getPostsBefore(this.posts[0].getRoughEstimate())
         .subscribe((postResponse) => {
           this.newPosts = postResponse.length;
         });
@@ -48,10 +47,13 @@ export class HomeComponent implements OnInit {
 
   getNewPosts(): void {
     this.service
-      .getPostsBefore(this.posts[0].getTimestamp())
+      .getPostsBefore(this.posts[0].getRoughEstimate())
       .subscribe((postResponse) => {
         this.posts.push(...postResponse);
+        this.posts.sort(Post.sort)
       });
+    // Make button dissapear...
+    this.newPosts = 0;
   }
 
   /**

@@ -25,11 +25,12 @@ import { MatListModule } from '@angular/material/list';
 import { MatDialogModule } from '@angular/material/dialog';
 import { MatChipsModule } from '@angular/material/chips';
 import { HomeComponent } from './pages/home/home.component';
-import {HttpInterceptorProviders} from './interceptors/http-interceptors'
+import { HttpInterceptorProviders } from './interceptors/http-interceptors';
 import { FlexLayoutModule } from '@angular/flex-layout';
-import {MatSidenavModule} from '@angular/material/sidenav';
+import { MatSidenavModule } from '@angular/material/sidenav';
 import { LoginComponent } from './pages/login/login.component';
 import { NotFoundComponent } from './pages/not-found/not-found.component';
+import { ProfileComponent } from './pages/profile/profile.component';
 
 @NgModule({
   declarations: [
@@ -42,6 +43,7 @@ import { NotFoundComponent } from './pages/not-found/not-found.component';
     HomeComponent,
     LoginComponent,
     NotFoundComponent,
+    ProfileComponent,
   ],
   imports: [
     BrowserModule,
@@ -62,7 +64,7 @@ import { NotFoundComponent } from './pages/not-found/not-found.component';
     InfiniteScrollModule,
     MatChipsModule,
     FlexLayoutModule,
-    MatSidenavModule
+    MatSidenavModule,
   ],
   providers: [HttpInterceptorProviders],
   bootstrap: [AppComponent],

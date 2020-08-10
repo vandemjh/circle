@@ -1,22 +1,32 @@
-import { Component, OnInit } from '@angular/core';
+import {
+  Component,
+  OnInit,
+  OnChanges,
+  SimpleChanges,
+  Input,
+} from '@angular/core';
 import { AuthService } from 'src/app/auth/auth.service';
+import { User } from 'src/app/models/user/user';
 
 @Component({
   selector: 'app-profile',
   templateUrl: './profile.component.html',
-  styleUrls: ['./profile.component.css']
+  styleUrls: ['./profile.component.css'],
 })
 export class ProfileComponent implements OnInit {
-  profileJson: string = "";
+  public profileJson: string = '';
+  user: User;
 
-  constructor(public auth: AuthService) { }
+  constructor() {}
 
-  ngOnInit() {
-    this.auth.userProfile.subscribe(
-      profile => {
-        console.log(profile)
-        this.profileJson = JSON.stringify(profile, null, 2)}
-    );
+  setUser(): void {
+    AuthService.getLoggedInUser().subscribe((user: User) => {
+      this.user = user;
+      this.profileJson = JSON.stringify(this.user);
+    });
   }
 
+  ngOnInit() {
+    this.setUser();
+  }
 }
