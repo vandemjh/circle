@@ -6,7 +6,7 @@ import { Injectable } from '@angular/core';
 import createAuth0Client, {
   Auth0ClientOptions,
   RedirectLoginResult,
-  GetTokenSilentlyOptions,
+  GetUserOptions,
 } from '@auth0/auth0-spa-js';
 import Auth0Client from '@auth0/auth0-spa-js/dist/typings/Auth0Client';
 import {
@@ -70,7 +70,7 @@ export class AuthService {
     concatMap((client: Auth0Client) => from(client.handleRedirectCallback())),
     catchError(
       (err, caught: Observable<RedirectLoginResult>): ObservableInput<any> => {
-        caught.subscribe((val) => console.log(err));
+        caught.subscribe((err) => console.log(err));
         return of(err);
       }
     )
@@ -104,7 +104,7 @@ export class AuthService {
 
   // When calling, options can be passed if desired
   // https://auth0.github.io/auth0-spa-js/classes/auth0client.html#getuser
-  private getUser(options?): Observable<any> {
+  private getUser(options?: GetUserOptions): Observable<any> {
     return this.auth0Client.pipe(
       concatMap((client: Auth0Client) => from(client.getUser(options))),
       tap((user) => this.userProfileSubject.next(user))

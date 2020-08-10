@@ -1,7 +1,6 @@
 import { Component, OnInit, Output, EventEmitter } from '@angular/core';
 import { AuthService } from 'src/app/auth/auth.service';
 import { User } from './models/user/user';
-import { Observable } from 'rxjs';
 
 @Component({
   selector: 'circle-root',

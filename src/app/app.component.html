@@ -1,15 +1,23 @@
 <circle-header [user]="this.user" #header></circle-header>
 
-<mat-sidenav-container mode="side" hasBackdrop="false">
+<mat-sidenav-container mode="push" hasBackdrop="false">
   <mat-sidenav
     [fixedInViewport]="true"
     [fixedTopGap]="56"
     [position]="'end'"
     [opened]="header.sidenavOpen"
   >
-    <button routerLink="/">Home</button>
-    <button (click)="this.auth.login()">Login</button>
-    <button (click)="this.auth.logout()">Logout</button>
+    <div fxLayout="column" fxLayoutAlign="space-between" fxLayoutGap="1em">
+      <button routerLink="/" mat-raised-button color="accent">
+        Home
+      </button>
+      <button mat-raised-button color="accent" (click)="this.auth.login()">
+        Login
+      </button>
+      <button mat-raised-button color="accent" (click)="this.auth.logout()">
+        Logout
+      </button>
+    </div>
   </mat-sidenav>
   <mat-sidenav-content>
     <router-outlet></router-outlet>
