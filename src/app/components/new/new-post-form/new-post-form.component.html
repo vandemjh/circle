@@ -1,31 +1,30 @@
 <form [formGroup]="postForm" (ngSubmit)="onSubmit()">
-    <mat-card>
-        <mat-card-header>
-            <div>
-                <p>profile picture</p>
-            </div>
-            <mat-card-title>
-                username
-            </mat-card-title>
-            <mat-card-subtitle>
-                <mat-form-field>
-                    <mat-label>
-                        Location
-                    </mat-label>
-                    <input matInput type="text" formControlName="location" />
-                </mat-form-field>
-            </mat-card-subtitle>
-        </mat-card-header>
-        <mat-card-content>
-            <mat-form-field>
-                <mat-label>Image link</mat-label>
-                <input matInput type="text" formControlName="imageUrl" />
-            </mat-form-field>
-            <mat-form-field>
-                <mat-label>Description</mat-label>
-                <input matInput type="text" formControlName="description" />
-            </mat-form-field>
-            <button type="submit">Submit</button>
-        </mat-card-content>
-    </mat-card>
+  <mat-card>
+    <mat-card-header>
+      <img mat-card-image src="{{ this.user.picture }}" />
+      <mat-card-title>
+        {{ this.user.username }}
+      </mat-card-title>
+      <mat-card-subtitle>
+        <mat-form-field>
+          <mat-label>
+            Location
+          </mat-label>
+          <input matInput type="text" formControlName="location" />
+        </mat-form-field>
+      </mat-card-subtitle>
+    </mat-card-header>
+    <mat-card-content>
+      <mat-form-field>
+        <mat-label>Description</mat-label>
+        <input matInput type="text" formControlName="description" />
+      </mat-form-field>
+      <button mat-raised-button color="primary">
+        Upload
+      </button>
+      <button mat-raised-button color="primary">
+        Post
+      </button>
+    </mat-card-content>
+  </mat-card>
 </form>

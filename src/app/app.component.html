@@ -8,11 +8,11 @@
     [opened]="header.sidenavOpen"
   >
     <div fxLayout="column" fxLayoutAlign="space-between" fxLayoutGap="1em">
+      <button routerLink="/profile" mat-raised-button color="accent">
+        Profile
+      </button>
       <button routerLink="/" mat-raised-button color="accent">
         Home
-      </button>
-      <button mat-raised-button color="accent" (click)="this.auth.login()">
-        Login
       </button>
       <button mat-raised-button color="accent" (click)="this.auth.logout()">
         Logout

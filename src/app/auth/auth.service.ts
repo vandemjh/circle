@@ -46,9 +46,14 @@ export class AuthService {
           createAuth0Client(this.config)
             .then((client: Auth0Client) => {
               observer.next(client);
-              client
-                .getUser()
-                .then((u) => AuthService.userReplaySubject.next(u));
+              client.getUser().then((uTemp: User) => {
+                if (uTemp && uTemp.sub)
+                  this.service
+                    .getUserBySub(uTemp.sub)
+                    .subscribe((user: User) =>
+                      AuthService.userReplaySubject.next(user)
+                    );
+              });
             })
             .catch((err) => throwError(err))
         );

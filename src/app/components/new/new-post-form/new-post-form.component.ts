@@ -1,4 +1,4 @@
-import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
+import { Component, OnInit, Input, Output, EventEmitter, SimpleChanges, OnChanges } from '@angular/core';
 import { FormGroup, FormControl } from '@angular/forms';
 import { Post } from '../../../models/post/post';
 import { CircleService } from '../../../services/circle.service';
@@ -20,16 +20,19 @@ export class NewPostFormComponent implements OnInit {
   });
   constructor(private circleService: CircleService) {}
 
-  ngOnInit(): void {}
+  ngOnInit(): void {
+    console.log(this.user)
+  }
+  
   onSubmit() {
     this.circleService
       .submitPost(
         new Post(
-          null,
-          null,
-          null,
-          null,
-          null,
+          undefined,
+          undefined,
+          undefined,
+          undefined,
+          this.user.uid,
           this.postForm.value.location,
           this.postForm.value.imageUrl,
           this.postForm.value.description

@@ -53,6 +53,14 @@ export class CircleService {
     return this.http.get<User>(environment.apiUrl + 'users/' + uid);
   }
 
+  /**
+   * Returns user object from sub
+   * @param sub to retreive user data from
+   */
+  getUserBySub(sub: string): Observable<User> {
+    return this.http.get<User>(environment.apiUrl + 'users/sub/' + sub);
+  }
+
   private static deserialize(): OperatorFunction<Post[], Post[]> {
     return map((result: Post[]) =>
       result.map(
