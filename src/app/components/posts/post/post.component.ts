@@ -9,13 +9,14 @@ import { Comment } from '../../../models/comment/comment';
 import { Post } from '../../../models/post/post';
 import { CircleService } from 'src/app/services/circle.service';
 import { User } from 'src/app/models/user/user';
+import { OnAutoChange } from '../../../models/on-auto-change/on-auto-change';
 
 @Component({
   selector: 'circle-post',
   templateUrl: './post.component.html',
   styleUrls: ['./post.component.css'],
 })
-export class PostComponent implements OnInit, OnChanges {
+export class PostComponent extends OnAutoChange implements OnInit {
   /**
    * Logged in user
    */
@@ -25,14 +26,8 @@ export class PostComponent implements OnInit, OnChanges {
   favorited: boolean;
   expanded: boolean;
 
-  constructor(private service: CircleService) {}
-
-  ngOnChanges(changes: SimpleChanges): void {
-    // console.log(changes.post.currentValue)
-    if (changes.post) {
-      Object.assign(this.post, changes.post.currentValue);
-      // console.log(this.post)
-    }
+  constructor(private service: CircleService) {
+    super();
   }
 
   ngOnInit(): void {
