@@ -4,12 +4,14 @@ import { CircleService } from 'src/app/services/circle.service';
 
 export class Comment extends Element {
   cid: string;
-  commenter: string;
+  uid: string;
   comment: string;
-  constructor(created: string, cid: string, comment: string, commenter: string) {
+
+  commenter: User;
+  constructor(created: string, cid: string, comment: string, uid: string) {
     super(created);
     this.cid = cid;
     this.comment = comment;
-    this.commenter = commenter;
+    this.uid = uid;
   }
 }

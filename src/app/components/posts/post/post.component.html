@@ -1,53 +1,54 @@
 <div class="padding">
-    <mat-card class="card">
-        <ng-template [ngIf]="!!this.poster">
-        <mat-card-header>
-                <div
-                mat-card-avatar
-                [style.background-image]="'url(' + this.poster.picture + ')'"
-                class="header-image"
-                ></div>
-                <mat-card-title>{{ this.poster.username }}</mat-card-title>
-                <mat-card-subtitle>{{ this.post.location }}</mat-card-subtitle>
-            </mat-card-header>
-        </ng-template>
-        <ng-template [ngIf]="!!this.post.imageurl">
-            <img
-            mat-card-image
-            src="{{ this.post.imageurl }}"
-            />
-        </ng-template>
-        <mat-card-content>
-            <p>
-                {{ this.post.description }}
-            </p>
-        </mat-card-content>
-        <mat-card-actions>
-            <button
-                (click)="toggleFavorited()"
-                matBadge="{{ getNumberOfLikes() }}"
-                [matBadgeHidden]="numberOfLikesHidden()"
-                matBadgePosition="above after"
-                matBadgeColor="accent"
-                mat-icon-button
-                color="{{ isFavorited() ? 'warn' : 'white' }}"
-                aria-label="Favorite"
-            >
-                <mat-icon>favorite</mat-icon>
-            </button>
-            <button
-                (click)="toggleExpanded()"
-                mat-button
-                matBadge="{{ getNumberOfComments() }}"
-                matBadgePosition="above after"
-                matBadgeColor="accent"
-            >
-                COMMENT
-            </button>
-            <button mat-button>SHARE</button>
-        </mat-card-actions>
-        <ng-template [ngIf]="expanded">
-            <circle-comments [cid]="this.post.cid" [user]="this.user" [comments]="this.post.comments"></circle-comments>
-        </ng-template>
-    </mat-card>
+  <mat-card class="card">
+    <ng-template [ngIf]="!!this.poster">
+      <mat-card-header>
+        <div
+          mat-card-avatar
+          [style.background-image]="'url(' + this.poster.picture + ')'"
+          class="header-image"
+        ></div>
+        <mat-card-title>{{ this.poster.username }}</mat-card-title>
+        <mat-card-subtitle>{{ this.post.location }}</mat-card-subtitle>
+      </mat-card-header>
+    </ng-template>
+    <ng-template [ngIf]="!!this.post.imageurl">
+      <img mat-card-image src="{{ this.post.imageurl }}" />
+    </ng-template>
+    <mat-card-content>
+      <p>
+        {{ this.post.description }}
+      </p>
+    </mat-card-content>
+    <mat-card-actions>
+      <button
+        (click)="toggleFavorited()"
+        matBadge="{{ getNumberOfLikes() }}"
+        [matBadgeHidden]="numberOfLikesHidden()"
+        matBadgePosition="above after"
+        matBadgeColor="accent"
+        mat-icon-button
+        color="{{ isFavorited() ? 'warn' : 'white' }}"
+        aria-label="Favorite"
+      >
+        <mat-icon>favorite</mat-icon>
+      </button>
+      <button
+        (click)="toggleExpanded()"
+        mat-button
+        matBadge="{{ getNumberOfComments() }}"
+        matBadgePosition="above after"
+        matBadgeColor="accent"
+      >
+        COMMENT
+      </button>
+      <button mat-button>SHARE</button>
+    </mat-card-actions>
+    <ng-template [ngIf]="expanded">
+      <circle-comments
+        [cid]="this.post.cid"
+        [user]="this.user"
+        [comments]="this.post.comments"
+      ></circle-comments>
+    </ng-template>
+  </mat-card>
 </div>
