@@ -62,6 +62,18 @@ export class CircleService {
     return this.http.get<User>(environment.apiUrl + 'users/sub/' + sub);
   }
 
+  getComments(cid: string): Observable<Comment[]> {
+    return this.http.get<Comment[]>(`${environment.apiUrl}comments/${cid}`);
+  }
+
+  getLikes(lid: string): Observable<User[]> {
+    return this.http.get<User[]>(`${environment.apiUrl}comments/${lid}`)
+  }
+
+  postComment(cid: string, comment: Comment): Observable<boolean> {
+    return this.http.post<boolean>(`${environment.apiUrl}comments`, comment);
+  }
+
   upload(data): Observable<Response<string>> {
     return this.http
       .post<any>(`${environment.apiUrl}upload`, data, {

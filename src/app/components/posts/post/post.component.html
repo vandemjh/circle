@@ -47,7 +47,7 @@
             <button mat-button>SHARE</button>
         </mat-card-actions>
         <ng-template [ngIf]="expanded">
-            <circle-comments [comments]="this.post.comments"></circle-comments>
+            <circle-comments [cid]="this.post.cid" [user]="this.user" [comments]="this.post.comments"></circle-comments>
         </ng-template>
     </mat-card>
 </div>

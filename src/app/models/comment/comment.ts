@@ -6,7 +6,7 @@ export class Comment extends Element {
   cid: string;
   commenter: string;
   comment: string;
-  constructor(service: CircleService, created: string, cid: string, comment: string, commenter: string) {
+  constructor(created: string, cid: string, comment: string, commenter: string) {
     super(created);
     this.cid = cid;
     this.comment = comment;
