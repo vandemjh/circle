@@ -12,6 +12,7 @@ import { Observable } from 'rxjs';
   styleUrls: ['./comments.component.css'],
 })
 export class CommentsComponent extends OnAutoChange implements OnInit {
+  // cid for this post
   @Input() cid: string;
   @Input() user: User;
   @Input() comments: Comment[];
@@ -22,37 +23,30 @@ export class CommentsComponent extends OnAutoChange implements OnInit {
     super();
   }
   ngOnInit(): void {
-    // this.getComments();
-    this.getCommentors();
+    this.getCommenters();
   }
 
-  // getComments(): void {
-  //   this.circleService
-  //     .getComments(this.cid)
-  //     .subscribe((comments: Comment[]) => (this.comments = comments));
-  // }
-
-  getCommentors(): void {
-    this.comments.forEach((comment: Comment) =>
+  getCommenters(): void {
+    if (this.comments) this.comments.forEach((comment: Comment) =>
       this.circleService
         .getUserByUID(comment.uid)
-        .subscribe((user: User) => (comment.commenter = user))
+        .subscribe(
+          (user: User) => (comment.commenter = user ? user : undefined)
+        )
     );
   }
 
   submitComment(): void {
-    this.circleService
-      .postComment(
+    this.circleService.postComment(
+      new Comment(
+        undefined,
         this.cid,
-        new Comment(
-          undefined,
-          this.cid,
-          this.commentForm.controls.comment.value,
-          this.user.uid
-        )
+        this.commentForm.controls.comment.value,
+        this.user.uid
       )
-      .subscribe((ret: boolean) => {
-        console.log(ret);
-      });
+    )
+    .subscribe((ret: boolean) => {
+      console.log(ret);
+    });
   }
 }

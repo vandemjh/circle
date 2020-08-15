@@ -2,13 +2,15 @@
   <ng-template [ngIf]="comments && comments.length > 0">
     <mat-divider [inset]="true"></mat-divider>
     <mat-list *ngFor="let comment of comments">
-      <mat-list-item>
-        <a>{{ comment.commenter.username }}</a>
-        <div class="space"><p>:</p></div>
-        <div class="comment">
-          <p>{{ comment.comment }}</p>
-        </div>
-      </mat-list-item>
+      <ng-template [ngIf]="comment.commenter">
+        <mat-list-item>
+          <a>{{ comment.commenter.username }}</a>
+          <div class="space"><p>:</p></div>
+          <div class="comment">
+            <p>{{ comment.comment }}</p>
+          </div>
+        </mat-list-item>
+      </ng-template>
       <mat-divider [inset]="true"></mat-divider>
     </mat-list>
   </ng-template>

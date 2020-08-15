@@ -70,7 +70,7 @@ export class CircleService {
     return this.http.get<User[]>(`${environment.apiUrl}comments/${lid}`)
   }
 
-  postComment(cid: string, comment: Comment): Observable<boolean> {
+  postComment(comment: Comment): Observable<boolean> {
     return this.http.post<boolean>(`${environment.apiUrl}comments`, comment);
   }
 
