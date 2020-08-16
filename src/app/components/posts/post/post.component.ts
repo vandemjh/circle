@@ -32,16 +32,20 @@ export class PostComponent extends OnAutoChange implements OnInit {
 
   ngOnInit(): void {
     this.expanded = false;
-    // this.favorited = this.getNumberOfLikes();
+    this.post.favorites = [];
+    // this.favorited = this.getNumberOffavorites();
     this.service
       .getComments(this.post.cid)
       .subscribe((comments: Comment[]) => (this.post.comments = comments));
     this.service
       .getUserByUID(this.post.uid)
       .subscribe((poster: User) => (this.poster = poster));
-    this.service
-      .getLikes(this.post.lid)
-      .subscribe((likers: User[]) => (this.post.likes = likers));
+    this.getFavorites();
+  }
+
+  ngOnChanges(changes: SimpleChanges): void {
+    super.ngOnChanges(changes);
+    this.getFavorites();
   }
 
   toggleExpanded(): void {
@@ -50,18 +54,38 @@ export class PostComponent extends OnAutoChange implements OnInit {
   isFavorited(): boolean {
     return this.favorited;
   }
+
   toggleFavorited(): void {
-    if (!this.favorited) this.post.likes.push(this.user);
-    else this.post.likes.splice(this.post.likes.indexOf(this.user), 1);
+    if (!this.favorited) this.post.favorites.push(this.user);
+    else this.post.favorites.splice(this.post.favorites.indexOf(this.user), 1);
     this.favorited = !this.favorited;
+    if (this.user && this.post)
+      this.service
+        .postFavorite(this.user.uid, this.post.pid)
+        .subscribe((resp: boolean) => console.log(resp));
+    else console.warn('post not loaded yet!', this.post, this.user);
   }
-  getNumberOfLikes(): number {
-    return !!this.post.likes ? this.post.likes.length : 0;
+
+  getFavorites(): void {
+    if (this.post && this.user)
+      this.service
+        .getFavorites(this.post.fid)
+        .subscribe((favoriters: User[]) => {
+          this.post.favorites = favoriters;
+          console.log(this.post)
+          this.favorited = this.post.favorites
+            .map((v) => v.uid)
+            .includes(this.user.uid);
+        });
+  }
+
+  getNumberOfFavorites(): number {
+    return !!this.post.favorites ? this.post.favorites.length : 0;
   }
   getNumberOfComments(): number {
-    return (this.post && this.post.comments) ? this.post.comments.length : 0;
+    return this.post && this.post.comments ? this.post.comments.length : 0;
   }
-  numberOfLikesHidden(): boolean {
-    return this.getNumberOfLikes() <= 0;
+  numberOfFavoritesHidden(): boolean {
+    return this.getNumberOfFavorites() <= 0;
   }
 }

@@ -9,7 +9,7 @@ export class Post extends Element {
     created: string,
     pid: string,
     cid: string,
-    lid: string,
+    fid: string,
     uid: string,
     location: string,
     imageurl: string,
@@ -18,7 +18,7 @@ export class Post extends Element {
     super(created);
     this.pid = pid;
     this.cid = cid;
-    this.lid = lid;
+    this.fid = fid;
     this.uid = uid;
     this.location = location;
     this.imageurl = imageurl;
@@ -26,7 +26,7 @@ export class Post extends Element {
   }
   pid: string;
   cid: string;
-  lid: string;
+  fid: string;
   uid: string;
   location: string;
   imageurl: string;
@@ -34,7 +34,7 @@ export class Post extends Element {
 
   poster: User;
   comments: Comment[];
-  likes: User[];
+  favorites: User[];
 
   static sort(a: Post, b: Post): number {
     return b.created.valueOf() - a.created.valueOf();

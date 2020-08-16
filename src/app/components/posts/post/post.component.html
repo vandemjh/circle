@@ -22,9 +22,9 @@
     <mat-card-actions>
       <button
         (click)="toggleFavorited()"
-        matBadge="{{ getNumberOfLikes() }}"
-        [matBadgeHidden]="numberOfLikesHidden()"
+        matBadge="{{ getNumberOfFavorites() }}"
         matBadgePosition="above after"
+        [matBadgeHidden]="numberOfFavoritesHidden()"
         matBadgeColor="accent"
         mat-icon-button
         color="{{ isFavorited() ? 'warn' : 'white' }}"

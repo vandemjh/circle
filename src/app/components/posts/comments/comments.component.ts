@@ -29,8 +29,7 @@ export class CommentsComponent extends OnAutoChange implements OnInit {
 
   ngOnChanges(changes: SimpleChanges): void {
     super.ngOnChanges(changes);
-    if (changes.comments && changes.comments.currentValue)
-      this.getCommenters();
+    if (changes.comments && changes.comments.currentValue) this.getCommenters();
   }
 
   getCommenters(): void {
@@ -55,7 +54,15 @@ export class CommentsComponent extends OnAutoChange implements OnInit {
         )
       )
       .subscribe((ret: boolean) => {
-        console.log(ret);
+        if (ret) {
+          this.circleService
+            .getComments(this.cid)
+            .subscribe((comments: Comment[]) => {
+              this.comments = comments;
+              this.getCommenters();
+              this.commentForm.reset();
+            });
+        }
       });
   }
 }

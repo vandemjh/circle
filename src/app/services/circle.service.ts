@@ -70,8 +70,16 @@ export class CircleService {
     return this.http.get<Comment[]>(`${environment.apiUrl}comments/count/${cid}`);
   }
 
-  getLikes(lid: string): Observable<User[]> {
-    return this.http.get<User[]>(`${environment.apiUrl}comments/${lid}`)
+  getFavorites(fid: string): Observable<User[]> {
+    return this.http.get<User[]>(`${environment.apiUrl}favorites/${fid}`)
+  }
+
+  getNumberOfFavorites(fid: string): Observable<number> {
+    return this.http.get<number>(`${environment.apiUrl}favorites/count/${fid}`)
+  }
+
+  postFavorite(uid: string, fid: string): Observable<boolean> {
+    return this.http.post<boolean>(`${environment.apiUrl}favorites`, {uid, fid})
   }
 
   postComment(comment: Comment): Observable<boolean> {
@@ -107,7 +115,7 @@ export class CircleService {
             item.created.toString(),
             item.pid,
             item.cid,
-            item.lid,
+            item.fid,
             item.uid,
             item.location,
             item.imageurl,
