@@ -1,4 +1,4 @@
-import { Component, OnInit, Input } from '@angular/core';
+import { Component, OnInit, Input, SimpleChanges } from '@angular/core';
 import { Comment } from '../../../models/comment/comment';
 import { FormGroup, FormControl } from '@angular/forms';
 import { CircleService } from 'src/app/services/circle.service';
@@ -23,30 +23,39 @@ export class CommentsComponent extends OnAutoChange implements OnInit {
     super();
   }
   ngOnInit(): void {
+    // console.log(this.comments)
     this.getCommenters();
   }
 
+  ngOnChanges(changes: SimpleChanges): void {
+    super.ngOnChanges(changes);
+    if (changes.comments && changes.comments.currentValue)
+      this.getCommenters();
+  }
+
   getCommenters(): void {
-    if (this.comments) this.comments.forEach((comment: Comment) =>
-      this.circleService
-        .getUserByUID(comment.uid)
-        .subscribe(
-          (user: User) => (comment.commenter = user ? user : undefined)
-        )
-    );
+    if (this.comments)
+      this.comments.forEach((comment: Comment) =>
+        this.circleService
+          .getUserByUID(comment.uid)
+          .subscribe(
+            (user: User) => (comment.commenter = user ? user : undefined)
+          )
+      );
   }
 
   submitComment(): void {
-    this.circleService.postComment(
-      new Comment(
-        undefined,
-        this.cid,
-        this.commentForm.controls.comment.value,
-        this.user.uid
+    this.circleService
+      .postComment(
+        new Comment(
+          undefined,
+          this.cid,
+          this.commentForm.controls.comment.value,
+          this.user.uid
+        )
       )
-    )
-    .subscribe((ret: boolean) => {
-      console.log(ret);
-    });
+      .subscribe((ret: boolean) => {
+        console.log(ret);
+      });
   }
 }

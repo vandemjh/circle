@@ -66,6 +66,10 @@ export class CircleService {
     return this.http.get<Comment[]>(`${environment.apiUrl}comments/${cid}`);
   }
 
+  getNumberOfComments(cid: string): Observable<Comment[]> {
+    return this.http.get<Comment[]>(`${environment.apiUrl}comments/count/${cid}`);
+  }
+
   getLikes(lid: string): Observable<User[]> {
     return this.http.get<User[]>(`${environment.apiUrl}comments/${lid}`)
   }

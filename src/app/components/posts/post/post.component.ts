@@ -59,8 +59,7 @@ export class PostComponent extends OnAutoChange implements OnInit {
     return !!this.post.likes ? this.post.likes.length : 0;
   }
   getNumberOfComments(): number {
-    return 0;
-    // return this.post.comments.length;
+    return (this.post && this.post.comments) ? this.post.comments.length : 0;
   }
   numberOfLikesHidden(): boolean {
     return this.getNumberOfLikes() <= 0;
