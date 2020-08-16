@@ -1,3 +1,4 @@
 export const environment = {
-    production: true,
+  apiUrl: 'https://circle-social-backend.herokuapp.com/',
+  production: true,
 };
