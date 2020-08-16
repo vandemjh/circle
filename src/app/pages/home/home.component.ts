@@ -67,7 +67,7 @@ export class HomeComponent implements OnInit {
 
   onScroll() {
     this.service
-      .getPostsAfter(this.posts[this.posts.length - 1].getTimestamp())
+      .getPostsAfter(this.posts[this.posts.length - 1].getRoughEstimateAfter())
       .subscribe((postResponse) => {
         this.posts.push(...postResponse);
         this.posts.sort(Post.sort);
