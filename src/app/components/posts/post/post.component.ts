@@ -61,7 +61,7 @@ export class PostComponent extends OnAutoChange implements OnInit {
     this.favorited = !this.favorited;
     if (this.user && this.post)
       this.service
-        .postFavorite(this.user.uid, this.post.pid)
+        .postFavorite(this.user.uid, this.post.fid)
         .subscribe((resp: boolean) => console.log(resp));
     else console.warn('post not loaded yet!', this.post, this.user);
   }
@@ -72,7 +72,7 @@ export class PostComponent extends OnAutoChange implements OnInit {
         .getFavorites(this.post.fid)
         .subscribe((favoriters: User[]) => {
           this.post.favorites = favoriters;
-          console.log(this.post)
+          // console.log(this.post)
           this.favorited = this.post.favorites
             .map((v) => v.uid)
             .includes(this.user.uid);
