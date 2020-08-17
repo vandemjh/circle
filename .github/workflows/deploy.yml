@@ -19,7 +19,7 @@ jobs:
       - name: Install dependencies
         run: npm ci
       - name: Build
-        run: ng build --prod --base-href /circle/
+        run: npx ng build --prod --base-href /circle/
       #      - name: Test
       #        run: npm run test:ci
       - name: Archive build
