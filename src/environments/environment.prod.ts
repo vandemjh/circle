@@ -1,4 +1,4 @@
 export const environment = {
-  apiUrl: 'https://circle-social-backend.herokuapp.com/',
+  apiUrl: 'https://192.168.1.80/api/',
   production: true,
 };
