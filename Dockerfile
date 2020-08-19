@@ -11,4 +11,4 @@ RUN npm run build --prod
 FROM nginx AS serve
 COPY nginx.conf /usr/local/nginx/conf/
 COPY --from=builder /build/dist/circle/ /usr/share/nginx/html/
-# EXPOSE 80
+EXPOSE 80
