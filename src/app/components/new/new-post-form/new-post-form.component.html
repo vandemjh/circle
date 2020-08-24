@@ -17,19 +17,19 @@
       </mat-card-subtitle>
     </mat-card-header>
     <mat-card-content>
-      <button
+      <!-- <button
         mat-raised-button
         color="primary"
         (click)="fileInput.click()"
-      >Choose image</button>
+      >Choose image</button> -->
+      <!-- hidden -->
       <input
-        hidden
         #fileInput
         type="file"
         id="image"
         (change)="fileChange($event)"
         placeholder="Upload Image"
-        accept=".png,.jpeg,.gif"
+        accept=".jpg,.png,.jpeg,.gif"
       />
       <mat-form-field>
         <mat-label>Description</mat-label>
