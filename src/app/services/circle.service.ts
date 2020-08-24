@@ -17,33 +17,33 @@ import {Response} from '../models/response/response'
 export class CircleService {
   constructor(private http: HttpClient) {}
   submitPost(toPost: Post): Observable<boolean> {
-    return this.http.post<boolean>(environment.apiUrl + 'posts/', toPost);
+    return this.http.post<boolean>(`${environment.apiUrl}posts/`, toPost);
   }
 
   getSecrets(): Observable<Auth0ClientOptions> {
-    return this.http.get<Auth0ClientOptions>(environment.apiUrl + 'secrets');
+    return this.http.get<Auth0ClientOptions>(`${environment.apiUrl}secrets`);
   }
 
   getPostsBefore(time: string): Observable<Post[]> {
     return this.http
-      .get<Post[]>(environment.apiUrl + 'posts/postedBefore/' + time)
+      .get<Post[]>(`${environment.apiUrl}posts/postedBefore/${time}`)
       .pipe(CircleService.deserialize());
   }
 
   getPostsAfter(time: string): Observable<Post[]> {
     return this.http
-      .get<Post[]>(environment.apiUrl + 'posts/postedAfter/' + time)
+      .get<Post[]>(`${environment.apiUrl}posts/postedAfter/${time}`)
       .pipe(CircleService.deserialize());
   }
 
   getPosts(): Observable<Post[]> {
     return this.http
-      .get<Post[]>(environment.apiUrl + 'posts')
+      .get<Post[]>(`${environment.apiUrl}posts`)
       .pipe(CircleService.deserialize());
   }
 
   login(obj: object): Observable<User> {
-    return this.http.post<User>(environment.apiUrl + 'login', obj);
+    return this.http.post<User>(`${environment.apiUrl}login`, obj);
   }
 
   /**
@@ -51,7 +51,7 @@ export class CircleService {
    * @param uid to retreive user data from
    */
   getUserByUID(uid: string): Observable<User> {
-    return this.http.get<User>(environment.apiUrl + 'users/' + uid);
+    return this.http.get<User>(`${environment.apiUrl}users/${uid}`);
   }
 
   /**
@@ -59,7 +59,7 @@ export class CircleService {
    * @param sub to retreive user data from
    */
   getUserBySub(sub: string): Observable<User> {
-    return this.http.get<User>(environment.apiUrl + 'users/sub/' + sub);
+    return this.http.get<User>(`${environment.apiUrl}users/sub/${sub}`);
   }
 
   getComments(cid: string): Observable<Comment[]> {
