@@ -93,6 +93,9 @@
           "configurations": {
             "production": {
               "browserTarget": "circle:build:production"
+            },
+            "local": {
+              "browserTarget": "circle:build:local"
             }
           }
         },
