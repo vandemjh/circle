@@ -4,11 +4,16 @@
     <mat-list *ngFor="let comment of comments">
       <ng-template [ngIf]="comment.commenter">
         <mat-list-item>
-          <a>{{ comment.commenter.username }}</a>
+          <a
+            [href]="'/profile/' + comment.commenter.username"
+            [ngStyle]="{ color: 'inherit', 'text-decoration': 'none' }"
+          >
+            <p>
+              {{ comment.commenter.username }}
+            </p>
+          </a>
           <div class="space"><p>:</p></div>
-          <div class="comment">
-            <p>{{ comment.comment }}</p>
-          </div>
+          <p>{{ comment.comment }}</p>
         </mat-list-item>
       </ng-template>
       <mat-divider [inset]="true"></mat-divider>

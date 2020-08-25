@@ -7,8 +7,17 @@
           [style.background-image]="'url(' + this.poster.picture + ')'"
           class="header-image"
         ></div>
-        <mat-card-title>{{ this.poster.username }}</mat-card-title>
-        <mat-card-subtitle [ngStyle]="{'min-height': '1em;'}">{{ this.post.location }}</mat-card-subtitle>
+        <mat-card-title
+          ><a
+            [href]="'/profile/' + this.poster.username"
+            [ngStyle]="{ color: 'inherit', 'text-decoration': 'none' }"
+          >
+            {{ this.poster.username }}
+          </a>
+        </mat-card-title>
+        <mat-card-subtitle [ngStyle]="{ 'min-height': '1em;' }">{{
+          this.post.location
+        }}</mat-card-subtitle>
       </mat-card-header>
     </ng-template>
     <ng-template [ngIf]="!!this.post.imageurl">
