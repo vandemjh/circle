@@ -62,7 +62,9 @@ export class PostComponent extends OnAutoChange implements OnInit {
     if (this.user && this.post)
       this.service
         .postFavorite(this.user.uid, this.post.fid)
-        // .subscribe((resp: boolean) => console.log(resp));
+        .subscribe((resp: boolean) => {
+          if (!resp) console.warn('error submitting like');
+        });
     else console.warn('post not loaded yet!', this.post, this.user);
   }
 
