@@ -13,7 +13,7 @@ import { Post } from 'src/app/models/post/post';
 export class ProfileComponent implements OnInit {
   user: User; //Logged in User
   profile: User;
-  posts: Post[] = [];
+  posts: Post[] = undefined;
 
   constructor(private route: ActivatedRoute, private service: CircleService) {
     this.route.queryParams.subscribe((param: Params) =>
@@ -22,9 +22,10 @@ export class ProfileComponent implements OnInit {
         .subscribe((ret: User) => {
           this.profile = ret;
           if (ret)
-            this.service
-              .getPostsByUID(ret.uid)
-              .subscribe((posts: Post[]) => this.posts.push(...posts));
+            this.service.getPostsByUID(ret.uid).subscribe((posts: Post[]) => {
+              this.posts = [];
+              this.posts.push(...posts);
+            });
         })
     );
   }
