@@ -8,7 +8,7 @@
           class="header-image"
         ></div>
         <mat-card-title>{{ this.poster.username }}</mat-card-title>
-        <mat-card-subtitle>{{ this.post.location }}</mat-card-subtitle>
+        <mat-card-subtitle [ngStyle]="{'min-height': '1em;'}">{{ this.post.location }}</mat-card-subtitle>
       </mat-card-header>
     </ng-template>
     <ng-template [ngIf]="!!this.post.imageurl">
