@@ -1,9 +1,9 @@
 # Raspberry pi is too slow to build using Docker...
 ng build --configuration=local
-ssh -T pi@circle.local << EOSSH
-sudo rm -r /var/www/html/*
-EOSSH
-scp -r dist/circle/* pi@circle.local:/var/www/html
-# ssh -T pi@circle.local << EOSSH
-# sudo nginx -s reload
-# EOSSH
+rsync -rvi --delete --progress dist/circle/ pi@circle.local:/var/www/html/
+
+# -v, --verbose               increase verbosity
+#  -r, --recursive             recurse into directories
+#  --delete                delete extraneous files from destination dirs
+#  --progress              show progress during transfer
+#  -i, --itemize-changes       output a change-summary for all updates
