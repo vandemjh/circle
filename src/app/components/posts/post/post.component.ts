@@ -2,8 +2,7 @@ import {
   Component,
   OnInit,
   Input,
-  OnChanges,
-  SimpleChanges,
+  SimpleChanges
 } from '@angular/core';
 import { Comment } from '../../../models/comment/comment';
 import { Post } from '../../../models/post/post';

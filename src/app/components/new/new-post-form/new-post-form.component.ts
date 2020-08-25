@@ -3,9 +3,7 @@ import {
   OnInit,
   Input,
   Output,
-  EventEmitter,
-  SimpleChanges,
-  OnChanges,
+  EventEmitter
 } from '@angular/core';
 import { FormGroup, FormControl } from '@angular/forms';
 import { Post } from '../../../models/post/post';

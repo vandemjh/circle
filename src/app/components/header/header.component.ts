@@ -1,29 +1,25 @@
 import {
   Component,
   OnInit,
-  Input,
-  OnChanges,
-  SimpleChanges,
-  EventEmitter,
+  Input
 } from '@angular/core';
 import { User } from 'src/app/models/user/user';
 import { AuthService } from 'src/app/auth/auth.service';
+import { OnAutoChange } from 'src/app/models/on-auto-change/on-auto-change';
 
 @Component({
   selector: 'circle-header',
   templateUrl: './header.component.html',
   styleUrls: ['./header.component.css'],
 })
-export class HeaderComponent implements OnInit, OnChanges {
+export class HeaderComponent extends OnAutoChange implements OnInit {
   sidenavOpen: boolean = false;
   @Input() user: User;
-  constructor() {}
+  constructor() {
+    super();
+  }
 
   ngOnInit(): void { }
-
-  ngOnChanges(changes: SimpleChanges): void {
-    if (changes.user) this.user = changes.user.currentValue;
-  }
 
   toggleSidenav(): void {
     this.sidenavOpen = !this.sidenavOpen;
