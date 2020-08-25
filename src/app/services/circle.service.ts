@@ -42,6 +42,12 @@ export class CircleService {
       .pipe(CircleService.deserialize());
   }
 
+  getPostsByUID(uid: string): Observable<Post[]> {
+    return this.http
+      .get<Post[]>(`${environment.apiUrl}posts/by/${uid}`)
+      .pipe(CircleService.deserialize());
+  }
+
   login(obj: object): Observable<User> {
     return this.http.post<User>(`${environment.apiUrl}login`, obj);
   }
@@ -60,6 +66,13 @@ export class CircleService {
    */
   getUserBySub(sub: string): Observable<User> {
     return this.http.get<User>(`${environment.apiUrl}users/sub/${sub}`);
+  }
+  /**
+   * Returns user object from username
+   * @param username to retreive user data from
+   */
+  getUserByUsername(username: string): Observable<User> {
+    return this.http.get<User>(`${environment.apiUrl}users/username/${username}`);
   }
 
   getComments(cid: string): Observable<Comment[]> {
