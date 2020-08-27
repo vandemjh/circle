@@ -130,8 +130,8 @@ export class CircleService {
             item.cid,
             item.fid,
             item.uid,
+            item.iid,
             item.location,
-            item.imageurl,
             item.description
           )
       )

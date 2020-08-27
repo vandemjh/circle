@@ -53,8 +53,8 @@ export class NewPostFormComponent implements OnInit {
               undefined,
               undefined,
               this.user.uid,
+              url.payload,
               this.postForm.value.location,
-              environment.apiUrl + url.payload,
               this.postForm.value.description
             )
           )

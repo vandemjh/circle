@@ -9,6 +9,7 @@ import { Post } from '../../../models/post/post';
 import { CircleService } from 'src/app/services/circle.service';
 import { User } from 'src/app/models/user/user';
 import { OnAutoChange } from '../../../models/on-auto-change/on-auto-change';
+import { environment } from 'src/environments/environment';
 
 @Component({
   selector: 'circle-post',
@@ -88,5 +89,9 @@ export class PostComponent extends OnAutoChange implements OnInit {
   }
   numberOfFavoritesHidden(): boolean {
     return this.getNumberOfFavorites() <= 0;
+  }
+
+  getPostUrl() {
+    return `${environment.apiUrl}images/${this.post.iid}`
   }
 }

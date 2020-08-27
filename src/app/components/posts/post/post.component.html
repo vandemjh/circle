@@ -20,8 +20,8 @@
         }}</mat-card-subtitle>
       </mat-card-header>
     </ng-template>
-    <ng-template [ngIf]="!!this.post.imageurl">
-      <img mat-card-image src="{{ this.post.imageurl }}" />
+    <ng-template [ngIf]="!!this.post.iid">
+      <img mat-card-image src="{{ getImageUrl() }}" />
     </ng-template>
     <mat-card-content>
       <p>

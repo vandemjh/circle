@@ -12,7 +12,7 @@ export class Post extends Element {
     fid: string,
     uid: string,
     location: string,
-    imageurl: string,
+    iid: string,
     description: string
   ) {
     super(created);
@@ -20,8 +20,8 @@ export class Post extends Element {
     this.cid = cid;
     this.fid = fid;
     this.uid = uid;
+    this.iid = iid;
     this.location = location;
-    this.imageurl = imageurl;
     this.description = description;
   }
   pid: string;
@@ -29,7 +29,7 @@ export class Post extends Element {
   fid: string;
   uid: string;
   location: string;
-  imageurl: string;
+  iid: string;
   description: string;
 
   poster: User;
