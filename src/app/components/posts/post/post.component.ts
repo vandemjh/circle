@@ -91,7 +91,7 @@ export class PostComponent extends OnAutoChange implements OnInit {
     return this.getNumberOfFavorites() <= 0;
   }
 
-  getPostUrl() {
+  getImageUrl() {
     return `${environment.apiUrl}images/${this.post.iid}`
   }
 }

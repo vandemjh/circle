@@ -18,7 +18,7 @@ export class ProfileComponent implements OnInit {
   constructor(private route: ActivatedRoute, private service: CircleService) {
     this.route.queryParams.subscribe((param: Params) =>
       service
-        .getUserByUsername(Object.keys(param)[0])
+        .getUserByUsername(param.username)
         .subscribe((ret: User) => {
           this.profile = ret;
           if (ret)

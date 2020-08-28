@@ -8,12 +8,17 @@
     [opened]="header.sidenavOpen"
   >
     <div fxLayout="column" fxLayoutAlign="space-between" fxLayoutGap="1em">
-      <button routerLink="/profile" mat-raised-button color="accent">
-        Profile
-      </button>
-      <button routerLink="/" mat-raised-button color="accent">
-        Home
-      </button>
+      <ng-template [ngIf]="this.user && this.user.username">
+        <button
+          routerLink="/profile"
+          [queryParams]="{ username: this.user.username }"
+          mat-raised-button
+          color="accent"
+        >
+          Profile
+        </button>
+      </ng-template>
+      <button routerLink="/" mat-raised-button color="accent">Home</button>
       <button mat-raised-button color="accent" (click)="this.auth.logout()">
         Logout
       </button>

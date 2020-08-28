@@ -5,7 +5,8 @@
       <ng-template [ngIf]="comment.commenter">
         <mat-list-item>
           <a
-            [href]="'/profile/?' + comment.commenter.username"
+            routerLink="/profile"
+            [queryParams]="{ username: comment.commenter.username }"
             [ngStyle]="{ color: 'inherit', 'text-decoration': 'none' }"
           >
             <p>
@@ -30,9 +31,7 @@
           cdkTextareaAutosize
         ></textarea>
       </mat-form-field>
-      <button mat-raised-button color="primary" type="submit">
-        Submit
-      </button>
+      <button mat-raised-button color="primary" type="submit">Submit</button>
     </form>
   </div>
 </div>
