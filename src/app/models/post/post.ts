@@ -11,8 +11,8 @@ export class Post extends Element {
     cid: string,
     fid: string,
     uid: string,
-    location: string,
     iid: string,
+    location: string,
     description: string
   ) {
     super(created);
