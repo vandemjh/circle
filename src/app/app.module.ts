@@ -32,7 +32,9 @@ import { LoginComponent } from './pages/login/login.component';
 import { NotFoundComponent } from './pages/not-found/not-found.component';
 import { ProfileComponent } from './pages/profile/profile.component';
 import { LogoutComponent } from './pages/logout/logout.component';
-import { ErrorComponent } from './components/error/error.component';
+import { ErrorComponent } from './components/info/error/error.component';
+import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
+import { SpinnerComponent } from './components/info/spinner/spinner.component';
 
 @NgModule({
   declarations: [
@@ -48,6 +50,7 @@ import { ErrorComponent } from './components/error/error.component';
     ProfileComponent,
     LogoutComponent,
     ErrorComponent,
+    SpinnerComponent,
   ],
   imports: [
     BrowserModule,
@@ -69,6 +72,7 @@ import { ErrorComponent } from './components/error/error.component';
     MatChipsModule,
     FlexLayoutModule,
     MatSidenavModule,
+    MatProgressSpinnerModule,
   ],
   providers: [HttpInterceptorProviders],
   bootstrap: [AppComponent],
