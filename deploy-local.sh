@@ -1,5 +1,5 @@
 # Raspberry pi is too slow to build using Docker...
-ng build --configuration=local
+ng build --prod #--configuration=local
 rsync -ri --delete dist/circle/ pi@circle.local:/var/www/html/
 
 # -v, --verbose               increase verbosity
