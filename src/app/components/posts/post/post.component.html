@@ -22,7 +22,10 @@
       </mat-card-header>
     </ng-template>
     <ng-template [ngIf]="!!this.post.iid">
-      <img mat-card-image src="{{ getImageUrl() }}" />
+      <img mat-card-image [src]="getImageUrl()" (load)="this.setLoaded()" [hidden]="!this.isLoaded()" />
+    </ng-template>
+    <ng-template [ngIf]="!this.isLoaded()">
+      <circle-spinner></circle-spinner>
     </ng-template>
     <mat-card-content>
       <p>

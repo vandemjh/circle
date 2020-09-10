@@ -25,12 +25,14 @@ export class PostComponent extends OnAutoChange implements OnInit {
   poster: User;
   favorited: boolean;
   expanded: boolean;
+  loaded: boolean;
 
   constructor(private service: CircleService) {
     super();
   }
 
   ngOnInit(): void {
+    this.loaded = false;
     this.expanded = false;
     this.post.favorites = [];
     // this.favorited = this.getNumberOffavorites();
@@ -93,5 +95,11 @@ export class PostComponent extends OnAutoChange implements OnInit {
 
   getImageUrl() {
     return `${environment.apiUrl}images/${this.post.iid}`
+  }
+  setLoaded(): void {
+    this.loaded = true;
+  }
+  isLoaded(): boolean {
+    return !!this.post.iid && this.loaded;
   }
 }
