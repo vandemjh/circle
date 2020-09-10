@@ -1,43 +1,49 @@
-<form [formGroup]="postForm" (ngSubmit)="onSubmit()">
-  <mat-card>
-    <mat-card-header>
-      <div
-        mat-card-avatar
-        [style.background-image]="'url(' + this.user.picture + ')'"
-        class="header-image"
-      ></div>
-      <mat-card-title>{{ this.user.username }}</mat-card-title>
-      <mat-card-subtitle>
-        <mat-form-field>
-          <mat-label>
-            Location
-          </mat-label>
-          <input matInput type="text" formControlName="location" />
-        </mat-form-field>
-      </mat-card-subtitle>
-    </mat-card-header>
-    <mat-card-content>
-      <!-- <button
-        mat-raised-button
-        color="primary"
-        (click)="fileInput.click()"
-      >Choose image</button> -->
-      <!-- hidden -->
-      <input
-        #fileInput
-        type="file"
-        id="image"
-        (change)="fileChange($event)"
-        placeholder="Upload Image"
-        accept=".jpg,.png,.jpeg,.gif"
-      />
-      <mat-form-field>
-        <mat-label>Description</mat-label>
-        <input matInput type="text" formControlName="description" />
-      </mat-form-field>
-      <button mat-raised-button color="primary">
-        Post
-      </button>
-    </mat-card-content>
-  </mat-card>
-</form>
+<div>
+  <ng-template [ngIf]="!this.submitClicked">
+    <form [formGroup]="postForm" (ngSubmit)="onSubmit()">
+      <ng-template [ngIf]="this.user && this.user.picture">
+        <mat-card>
+          <mat-card-header>
+            <div
+              mat-card-avatar
+              [style.background-image]="'url(' + this.user.picture + ')'"
+              class="header-image"
+            ></div>
+            <mat-card-title>{{ this.user.username }}</mat-card-title>
+            <mat-card-subtitle>
+              <mat-form-field>
+                <mat-label> Location </mat-label>
+                <input matInput type="text" formControlName="location" />
+              </mat-form-field>
+            </mat-card-subtitle>
+          </mat-card-header>
+          <mat-card-content>
+            <!-- <button
+            mat-raised-button
+            color="primary"
+            (click)="fileInput.click()"
+            >Choose image</button> -->
+            <!-- hidden -->
+            <input
+              #fileInput
+              type="file"
+              id="image"
+              (change)="fileChange($event)"
+              placeholder="Upload Image"
+              accept=".jpg,.png,.jpeg,.gif"
+            />
+            <mat-form-field>
+              <mat-label>Description</mat-label>
+              <input matInput type="text" formControlName="description" />
+            </mat-form-field>
+            <button mat-raised-button color="primary">Post</button>
+          </mat-card-content>
+        </mat-card>
+      </ng-template>
+    </form>
+  </ng-template>
+  <ng-template [ngIf]="this.submitClicked && !this.isLoaded()">
+    <circle-spinner [progress]="this.progress"></circle-spinner>
+    <p>{{ this.progress }}% complete</p>
+  </ng-template>
+</div>

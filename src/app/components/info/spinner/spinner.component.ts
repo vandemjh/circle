@@ -1,15 +1,17 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Input } from '@angular/core';
+import { OnAutoChange } from 'src/app/models/on-auto-change/on-auto-change';
 
 @Component({
   selector: 'circle-spinner',
   templateUrl: './spinner.component.html',
-  styleUrls: ['./spinner.component.css']
+  styleUrls: ['./spinner.component.css'],
 })
-export class SpinnerComponent implements OnInit {
+export class SpinnerComponent extends OnAutoChange implements OnInit {
+  @Input() progress: number = undefined;
 
-  constructor() { }
-
-  ngOnInit(): void {
+  constructor() {
+    super();
   }
 
+  ngOnInit(): void {}
 }

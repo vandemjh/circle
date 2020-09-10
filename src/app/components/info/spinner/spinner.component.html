@@ -1,3 +1,11 @@
 <div fxLayout="column" fxLayoutAlign="center center">
-  <mat-spinner color="accent"></mat-spinner>
+  <ng-template [ngIf]="!!this.progress">
+    <mat-progress-spinner
+      [value]="this.progress"
+      color="accent"
+    ></mat-progress-spinner>
+  </ng-template>
+  <ng-template [ngIf]="!!!this.progress">
+    <mat-spinner color="accent"></mat-spinner>
+  </ng-template>
 </div>

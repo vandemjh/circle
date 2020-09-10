@@ -21,6 +21,9 @@ export class NewPostFormComponent implements OnInit {
     image: new FormControl(''),
     description: new FormControl(''),
   });
+  private loaded: boolean = true;
+  submitClicked: boolean = false;
+  progress: number = 0;
   constructor(private circleService: CircleService) {}
 
   ngOnInit(): void {}
@@ -33,6 +36,8 @@ export class NewPostFormComponent implements OnInit {
   }
 
   onSubmit() {
+    this.submitClicked = true;
+    this.loaded = false;
     var formData = new FormData();
     formData.append('image', this.postForm.get('image').value);
 
@@ -51,8 +56,20 @@ export class NewPostFormComponent implements OnInit {
           )
         )
         .subscribe((res) => {
-          this.submitted.emit(res);
+          // Post submitted
+          this.progress += 50;
         });
+      // Image uploaded
+      this.progress += 50;
+      this.setLoaded();
+      this.submitted.emit(true);
     });
+  }
+
+  setLoaded(): void {
+    this.loaded = true;
+  }
+  isLoaded(): boolean {
+    return this.loaded;
   }
 }

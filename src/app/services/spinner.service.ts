@@ -10,7 +10,6 @@ export class SpinnerService {
   constructor() { }
   updateProgress(progress: number) {
     this.progress = progress;
-    console.log(progress)
   }
   isDone(): boolean {
     return this.done;
