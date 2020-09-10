@@ -1,17 +1,11 @@
-import {
-  Component,
-  OnInit,
-  Input,
-  Output,
-  EventEmitter
-} from '@angular/core';
+import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 import { FormGroup, FormControl } from '@angular/forms';
 import { Post } from '../../../models/post/post';
 import { CircleService } from '../../../services/circle.service';
 import { User } from 'src/app/models/user/user';
 import { environment } from 'src/environments/environment';
 import { formatDate } from '@angular/common';
-import {Response} from '../../../models/response/response'
+import { Response } from '../../../models/response/response';
 
 @Component({
   selector: 'circle-new-post-form',
@@ -42,25 +36,23 @@ export class NewPostFormComponent implements OnInit {
     var formData = new FormData();
     formData.append('image', this.postForm.get('image').value);
 
-    this.circleService
-      .upload(formData)
-      .subscribe((url: Response<string>) => {
-        this.circleService
-          .submitPost(
-            new Post(
-              undefined,
-              undefined,
-              undefined,
-              undefined,
-              this.user.uid,
-              url.payload,
-              this.postForm.value.location,
-              this.postForm.value.description
-            )
+    this.circleService.upload(formData).subscribe((url: Response<string>) => {
+      this.circleService
+        .submitPost(
+          new Post(
+            undefined,
+            undefined,
+            undefined,
+            undefined,
+            this.user.uid,
+            url.payload,
+            this.postForm.value.location,
+            this.postForm.value.description
           )
-          .subscribe((res) => {
-            this.submitted.emit(res);
-          });
-      });
+        )
+        .subscribe((res) => {
+          this.submitted.emit(res);
+        });
+    });
   }
 }
