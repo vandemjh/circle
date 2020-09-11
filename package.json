@@ -24,6 +24,7 @@
     "@angular/router": "~10.0.0",
     "@auth0/auth0-spa-js": "^1.11.0",
     "moment-timezone": "^0.5.31",
+    "ngx-device-detector": "^2.0.0",
     "ngx-infinite-scroll": "^9.0.0",
     "rxjs": "~6.5.5",
     "tslib": "^2.0.0",
