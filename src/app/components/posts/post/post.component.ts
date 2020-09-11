@@ -1,9 +1,4 @@
-import {
-  Component,
-  OnInit,
-  Input,
-  SimpleChanges
-} from '@angular/core';
+import { Component, OnInit, Input, SimpleChanges } from '@angular/core';
 import { Comment } from '../../../models/comment/comment';
 import { Post } from '../../../models/post/post';
 import { CircleService } from 'src/app/services/circle.service';
@@ -94,7 +89,7 @@ export class PostComponent extends OnAutoChange implements OnInit {
   }
 
   getImageUrl() {
-    return `${environment.apiUrl}images/${this.post.iid}`
+    return `${environment.apiUrl}images/${this.post.iid}`;
   }
   setLoaded(): void {
     this.loaded = true;
