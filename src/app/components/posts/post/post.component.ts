@@ -4,7 +4,7 @@ import { Post } from '../../../models/post/post';
 import { CircleService } from 'src/app/services/circle.service';
 import { User } from 'src/app/models/user/user';
 import { OnAutoChange } from '../../../models/on-auto-change/on-auto-change';
-import { environment } from 'src/environments/environment';
+import { DeviceDetectorService } from 'ngx-device-detector';
 
 @Component({
   selector: 'circle-post',
@@ -22,7 +22,10 @@ export class PostComponent extends OnAutoChange implements OnInit {
   expanded: boolean;
   loaded: boolean;
 
-  constructor(private circleService: CircleService) {
+  constructor(
+    private circleService: CircleService,
+    private deviceService: DeviceDetectorService
+  ) {
     super();
   }
 
@@ -38,6 +41,12 @@ export class PostComponent extends OnAutoChange implements OnInit {
       .getUserByUID(this.post.uid)
       .subscribe((poster: User) => (this.poster = poster));
     this.getFavorites();
+  }
+
+  getMobileStyle(): object {
+    return this.deviceService.isMobile()
+      ? { 'max-width': '100%' }
+      : { 'max-width': '60%' };
   }
 
   ngOnChanges(changes: SimpleChanges): void {

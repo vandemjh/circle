@@ -1,5 +1,5 @@
 <div class="padding">
-  <mat-card class="card">
+  <mat-card class="card" [ngStyle]="this.getMobileStyle()">
     <ng-template [ngIf]="!!this.poster">
       <mat-card-header>
         <div
