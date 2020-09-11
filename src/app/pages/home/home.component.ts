@@ -19,7 +19,8 @@ export class HomeComponent implements OnInit {
   posts: Post[];
   newPosts: number;
   isAuthenticated: boolean;
-  constructor(private service: CircleService) {}
+  private postsPushed: boolean = false;
+  constructor(private circleService: CircleService) {}
 
   ngOnInit(): void {
     this.newPosts = 0;
@@ -30,7 +31,7 @@ export class HomeComponent implements OnInit {
   }
 
   getPosts(): void {
-    this.service.getPosts().subscribe((postResponse) => {
+    this.circleService.getPosts().subscribe((postResponse) => {
       this.posts.push(...postResponse);
       this.posts.sort(Post.sort);
     });
@@ -38,19 +39,19 @@ export class HomeComponent implements OnInit {
 
   checkForNewPosts(): void {
     if (!!this.posts[0])
-      this.service
-        .getPostsBefore(this.posts[0].getRoughEstimate())
+      this.circleService
+        .getPostsBefore(this.posts[0].getRoughEstimateBefore())
         .subscribe((postResponse) => {
           this.newPosts = postResponse.length;
         });
   }
 
   getNewPosts(): void {
-    this.service
-      .getPostsBefore(this.posts[0].getRoughEstimate())
+    this.circleService
+      .getPostsBefore(this.posts[0].getRoughEstimateBefore())
       .subscribe((postResponse) => {
         this.posts.push(...postResponse);
-        this.posts.sort(Post.sort)
+        this.posts.sort(Post.sort);
       });
     // Make button dissapear...
     this.newPosts = 0;
@@ -66,12 +67,20 @@ export class HomeComponent implements OnInit {
   }
 
   onScroll() {
-    this.service
-      .getPostsAfter(this.posts[this.posts.length - 1].getRoughEstimateAfter())
-      .subscribe((postResponse) => {
-        this.posts.push(...postResponse);
-        this.posts.sort(Post.sort);
-      });
-    // console.log(this.posts)
+    // Check if currently processing post push
+    if (!this.postsPushed) {
+      // Signal posts are being pushed
+      this.postsPushed = true;
+      this.circleService
+        .getPostsAfter(
+          this.posts[this.posts.length - 1].getRoughEstimateAfter()
+        )
+        .subscribe((postResponse) => {
+          this.posts.push(...postResponse);
+          this.posts.sort(Post.sort);
+          // Reset flag, ready for next push
+          this.postsPushed = false;
+        });
+    }
   }
 }

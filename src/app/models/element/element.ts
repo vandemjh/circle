@@ -14,7 +14,7 @@ export abstract class Element {
   /**
    * Either moment or backend rounds the timestamps, this evens it out
    */
-  getRoughEstimate(): string {
+  getRoughEstimateBefore(): string {
     return moment(this.created.valueOf() + 1).toISOString();
   }
 
