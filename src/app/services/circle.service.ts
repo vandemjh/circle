@@ -2,14 +2,14 @@ import { Injectable } from '@angular/core';
 import { environment } from '../../environments/environment';
 import { HttpClient, HttpEventType } from '@angular/common/http';
 import { Post } from '../models/post/post';
-import { Observable, of, OperatorFunction } from 'rxjs';
+import { Observable, of, OperatorFunction, from } from 'rxjs';
 import { User } from '../models/user/user';
 import { Comment } from '../models/comment/comment';
-import { map } from 'rxjs/operators';
+import { map, tap } from 'rxjs/operators';
 import { Moment } from 'moment-timezone';
 import { AuthService } from '../auth/auth.service';
 import { Auth0ClientOptions } from '@auth0/auth0-spa-js';
-import {Response} from '../models/response/response'
+import { Response } from '../models/response/response';
 
 @Injectable({
   providedIn: 'root',
@@ -57,7 +57,22 @@ export class CircleService {
    * @param uid to retreive user data from
    */
   getUserByUID(uid: string): Observable<User> {
-    return this.http.get<User>(`${environment.apiUrl}users/${uid}`);
+    return !!sessionStorage.getItem(`${environment.apiUrl}users/${uid}`)
+      ? of(
+          JSON.parse(
+            sessionStorage.getItem(`${environment.apiUrl}users/${uid}`)
+          ) as User
+        )
+      : this.http
+          .get<User>(`${environment.apiUrl}users/${uid}`)
+          .pipe(
+            tap((user: User) =>
+              sessionStorage.setItem(
+                `${environment.apiUrl}users/${uid}`,
+                JSON.stringify(user)
+              )
+            )
+          );
   }
 
   /**
@@ -72,7 +87,9 @@ export class CircleService {
    * @param username to retreive user data from
    */
   getUserByUsername(username: string): Observable<User> {
-    return this.http.get<User>(`${environment.apiUrl}users/username/${username}`);
+    return this.http.get<User>(
+      `${environment.apiUrl}users/username/${username}`
+    );
   }
 
   getComments(cid: string): Observable<Comment[]> {
@@ -80,19 +97,24 @@ export class CircleService {
   }
 
   getNumberOfComments(cid: string): Observable<Comment[]> {
-    return this.http.get<Comment[]>(`${environment.apiUrl}comments/count/${cid}`);
+    return this.http.get<Comment[]>(
+      `${environment.apiUrl}comments/count/${cid}`
+    );
   }
 
   getFavorites(fid: string): Observable<User[]> {
-    return this.http.get<User[]>(`${environment.apiUrl}favorites/${fid}`)
+    return this.http.get<User[]>(`${environment.apiUrl}favorites/${fid}`);
   }
 
   getNumberOfFavorites(fid: string): Observable<number> {
-    return this.http.get<number>(`${environment.apiUrl}favorites/count/${fid}`)
+    return this.http.get<number>(`${environment.apiUrl}favorites/count/${fid}`);
   }
 
   postFavorite(uid: string, fid: string): Observable<boolean> {
-    return this.http.post<boolean>(`${environment.apiUrl}favorites`, {uid, fid})
+    return this.http.post<boolean>(`${environment.apiUrl}favorites`, {
+      uid,
+      fid,
+    });
   }
 
   postComment(comment: Comment): Observable<boolean> {
