@@ -22,7 +22,7 @@ export class PostComponent extends OnAutoChange implements OnInit {
   expanded: boolean;
   loaded: boolean;
 
-  constructor(private service: CircleService) {
+  constructor(private circleService: CircleService) {
     super();
   }
 
@@ -31,10 +31,10 @@ export class PostComponent extends OnAutoChange implements OnInit {
     this.expanded = false;
     this.post.favorites = [];
     // this.favorited = this.getNumberOffavorites();
-    this.service
+    this.circleService
       .getComments(this.post.cid)
       .subscribe((comments: Comment[]) => (this.post.comments = comments));
-    this.service
+    this.circleService
       .getUserByUID(this.post.uid)
       .subscribe((poster: User) => (this.poster = poster));
     this.getFavorites();
@@ -57,7 +57,7 @@ export class PostComponent extends OnAutoChange implements OnInit {
     else this.post.favorites.splice(this.post.favorites.indexOf(this.user), 1);
     this.favorited = !this.favorited;
     if (this.user && this.post)
-      this.service
+      this.circleService
         .postFavorite(this.user.uid, this.post.fid)
         .subscribe((resp: boolean) => {
           if (!resp) console.warn('error submitting like');
@@ -67,7 +67,7 @@ export class PostComponent extends OnAutoChange implements OnInit {
 
   getFavorites(): void {
     if (this.post && this.user)
-      this.service
+      this.circleService
         .getFavorites(this.post.fid)
         .subscribe((favoriters: User[]) => {
           this.post.favorites = favoriters;
@@ -89,7 +89,7 @@ export class PostComponent extends OnAutoChange implements OnInit {
   }
 
   getImageUrl() {
-    return `${environment.apiUrl}images/${this.post.iid}`;
+    return this.circleService.getImageUrl(this.post);
   }
   setLoaded(): void {
     this.loaded = true;
