@@ -213,6 +213,8 @@ FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR
 OTHER DEALINGS IN THE SOFTWARE.
 
 
+ngx-device-detector
+
 ngx-infinite-scroll
 MIT
 MIT License
