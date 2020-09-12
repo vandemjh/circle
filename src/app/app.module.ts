@@ -35,6 +35,8 @@ import { LogoutComponent } from './pages/logout/logout.component';
 import { ErrorComponent } from './components/info/error/error.component';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import { SpinnerComponent } from './components/info/spinner/spinner.component';
+import { ProgressBarComponent } from './components/info/progress-bar/progress-bar.component';
+import { MatProgressBarModule } from '@angular/material/progress-bar';
 
 @NgModule({
   declarations: [
@@ -51,6 +53,7 @@ import { SpinnerComponent } from './components/info/spinner/spinner.component';
     LogoutComponent,
     ErrorComponent,
     SpinnerComponent,
+    ProgressBarComponent,
   ],
   imports: [
     BrowserModule,
@@ -73,6 +76,7 @@ import { SpinnerComponent } from './components/info/spinner/spinner.component';
     FlexLayoutModule,
     MatSidenavModule,
     MatProgressSpinnerModule,
+    MatProgressBarModule,
   ],
   providers: [HttpInterceptorProviders],
   bootstrap: [AppComponent],

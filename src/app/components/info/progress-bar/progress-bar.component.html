@@ -1,0 +1,9 @@
+<ng-template [ngIf]="this.isHidden()">
+  <mat-progress-bar
+    [@fadeInOut]="'in'"
+    [color]="'warn'"
+    [mode]="'determinate'"
+    [value]="this.getValue()"
+    class="bar"
+  ></mat-progress-bar>
+</ng-template>

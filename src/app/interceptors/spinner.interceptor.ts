@@ -18,18 +18,18 @@ export class SpinnerInterceptor implements HttpInterceptor {
     request: HttpRequest<unknown>,
     next: HttpHandler
   ): Observable<HttpEvent<unknown>> {
-    // if (req.reportProgress) {
-    // only intercept when the request is configured to report its progress
     return next.handle(request).pipe(
       tap(
         (event: HttpEvent<any>) => {
-          if (event.type === HttpEventType.DownloadProgress) {
-            // here we get the updated progress values, call your service or what ever here
-            this.spinnerService.updateProgress(
-              Math.round((event.loaded / event.total) * 100)
-            ); // display & update progress bar
-          } else if (event.type === HttpEventType.Response) {
-            this.spinnerService.complete();
+          switch (event.type) {
+            case HttpEventType.Sent:
+              this.spinnerService.start();
+            // case HttpEventType.DownloadProgress:
+            //   this.spinnerService.updateProgress(
+            //     Math.round((event.loaded / event.total) * 100)
+            //   );
+            case HttpEventType.Response:
+              this.spinnerService.complete();
           }
         },
         (error) => {
@@ -37,7 +37,5 @@ export class SpinnerInterceptor implements HttpInterceptor {
         }
       )
     );
-    // } else {
-    //   return next.handle(req);
   }
 }
