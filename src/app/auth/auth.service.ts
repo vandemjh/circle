@@ -46,8 +46,8 @@ export class AuthService {
           createAuth0Client(this.config)
             .then((client: Auth0Client) => {
               observer.next(client);
-              client.getUser().then((uTemp: User) => {
-                if (uTemp && uTemp.sub)
+              client.getUser().then((uTemp: any) => {
+                if (uTemp && !(uTemp instanceof User) && uTemp.sub)
                   this.service
                     .getUserBySub(uTemp.sub)
                     .subscribe((user: User) =>
