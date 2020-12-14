@@ -37,6 +37,7 @@ import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import { SpinnerComponent } from './components/info/spinner/spinner.component';
 import { ProgressBarComponent } from './components/info/progress-bar/progress-bar.component';
 import { MatProgressBarModule } from '@angular/material/progress-bar';
+import { MatSlideToggleModule } from '@angular/material/slide-toggle';
 
 @NgModule({
   declarations: [
@@ -77,6 +78,7 @@ import { MatProgressBarModule } from '@angular/material/progress-bar';
     MatSidenavModule,
     MatProgressSpinnerModule,
     MatProgressBarModule,
+    MatSlideToggleModule,
   ],
   providers: [HttpInterceptorProviders],
   bootstrap: [AppComponent],

@@ -43,11 +43,9 @@ export class CircleService {
   }
 
   getImageUrl(post: Post): string {
-    // var db = indexedDB.open("images");
-    // db.onsuccess = (ev: Event) => {
-    //   // console.log(ev);
-    // }
-    return `${environment.apiUrl}images/${post.iid}`;
+    return `${environment.apiUrl}images/${
+      environment.minified ? 'minified' : 'image'
+    }/${post.iid}`;
   }
 
   getPostsByUID(uid: string): Observable<Post[]> {

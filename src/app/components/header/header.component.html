@@ -2,8 +2,15 @@
   <a [routerLink]="['/']">
     <span>Circle</span>
   </a>
-  <span class="fill-space"></span>
+  <div class="fill-space"></div>
   <ng-template [ngIf]="!!this.user">
+    <mat-slide-toggle
+      (change)="this.toggleHDPictures()"
+      [color]="'primary'"
+      [checked]="!this.hdPictures"
+      class="toggle"
+      >HD Pictures</mat-slide-toggle
+    >
     <button
       mat-fab
       (click)="this.toggleSidenav()"

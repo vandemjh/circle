@@ -2,6 +2,10 @@
   flex: 1 1 auto;
 }
 
+.toggle {
+  padding-right: 1em;
+}
+
 .profilepic {
   background-size: cover;
 }
