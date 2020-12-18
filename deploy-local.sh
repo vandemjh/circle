@@ -1,6 +1,9 @@
 # Raspberry pi is too slow to build using Docker...
 ng build --prod #--configuration=local
-rsync -ri --delete dist/circle/ pi@circle.local:/var/www/html/
+rsync -e "ssh -i ~/Downloads/Jack-Linux-Laptop.pem" \
+-ri --delete \
+--rsync-path="sudo rsync" \
+dist/circle/ ubuntu@34.227.113.180:/var/www/html
 
 # -v, --verbose               increase verbosity
 # -r, --recursive             recurse into directories
