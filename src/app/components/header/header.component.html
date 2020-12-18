@@ -1,8 +1,9 @@
 <mat-toolbar>
   <a [routerLink]="['/']">
-    <span>Circle</span>
+    <img src="assets/circle.svg" style="width: 100%; height: auto;" />
   </a>
-  <div class="fill-space"></div>
+  <span style="flex: 1 1 auto"></span>
+  <button mat-button [color]="'primary'" (click)="installPwa()">Install</button>
   <ng-template [ngIf]="!!this.user">
     <mat-slide-toggle
       (change)="this.toggleHDPictures()"

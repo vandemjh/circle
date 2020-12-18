@@ -12,6 +12,7 @@ export class HeaderComponent extends OnAutoChange implements OnInit {
   sidenavOpen: boolean = false;
   hdPictures: boolean = false;
   @Input() user: User;
+  promptEvent: Event;
   constructor() {
     super();
   }
@@ -20,15 +21,23 @@ export class HeaderComponent extends OnAutoChange implements OnInit {
     this.hdPictures =
       localStorage.getItem('hdPictures') === 'true' ? true : false;
     environment.minified = this.hdPictures;
+    window.addEventListener('beforeinstallprompt', (event) => {
+      this.promptEvent = event;
+    });
   }
-  
+
   toggleSidenav(): void {
     this.sidenavOpen = !this.sidenavOpen;
   }
-  
+
   toggleHDPictures(): void {
     this.hdPictures = !this.hdPictures;
     localStorage.setItem('hdPictures', `${this.hdPictures}`);
     environment.minified = this.hdPictures;
+  }
+
+  installPwa(): void {
+    if (this.promptEvent) document.dispatchEvent(this.promptEvent);
+    else console.warn('Install event error');
   }
 }
