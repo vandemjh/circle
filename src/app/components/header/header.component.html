@@ -3,7 +3,9 @@
     <img src="assets/circle.svg" style="width: 100%; height: auto;" />
   </a>
   <span style="flex: 1 1 auto"></span>
-  <button mat-button [color]="'primary'" (click)="installPwa()">Install</button>
+  <ng-template [ngIf]="!ignoreInstall">
+    <button mat-button [color]="'primary'" (click)="installPwa()">Install</button>
+  </ng-template>
   <ng-template [ngIf]="!!this.user">
     <mat-slide-toggle
       (change)="this.toggleHDPictures()"

@@ -12,17 +12,24 @@ export class HeaderComponent extends OnAutoChange implements OnInit {
   sidenavOpen: boolean = false;
   hdPictures: boolean = false;
   @Input() user: User;
-  promptEvent: Event;
+  promptEvent: any;
+  ignoreInstall: boolean;
   constructor() {
     super();
   }
 
   ngOnInit(): void {
+    this.ignoreInstall = false;
     this.hdPictures =
       localStorage.getItem('hdPictures') === 'true' ? true : false;
     environment.minified = this.hdPictures;
     window.addEventListener('beforeinstallprompt', (event) => {
+      event.preventDefault();
       this.promptEvent = event;
+      // console.log(event);
+    });
+    window.addEventListener('appinstalled', () => {
+      this.ignoreInstall = true;
     });
   }
 
@@ -37,7 +44,12 @@ export class HeaderComponent extends OnAutoChange implements OnInit {
   }
 
   installPwa(): void {
-    if (this.promptEvent) document.dispatchEvent(this.promptEvent);
-    else console.warn('Install event error');
+    if (this.promptEvent != null) {
+      this.promptEvent.prompt();
+      this.promptEvent.userChoice.then((result) => {
+        if (!result && result.outcome === 'accepted') this.ignoreInstall = true;
+      });
+    }
+    this.promptEvent = null;
   }
 }
