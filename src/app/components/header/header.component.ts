@@ -14,6 +14,7 @@ export class HeaderComponent extends OnAutoChange implements OnInit {
   @Input() user: User;
   promptEvent: any;
   ignoreInstall: boolean;
+  displayMode = 'browser tab';
   constructor() {
     super();
   }
@@ -30,6 +31,20 @@ export class HeaderComponent extends OnAutoChange implements OnInit {
     });
     window.addEventListener('appinstalled', () => {
       this.ignoreInstall = true;
+    });
+    window.addEventListener('DOMContentLoaded', () => {
+      if (!Navigator['standalone'] && Navigator['standalone'].standalone) {
+        this.displayMode = 'standalone-ios';
+      }
+      if (window.matchMedia('(display-mode: standalone)').matches) {
+        this.displayMode = 'standalone';
+      }
+      // Log launch display mode to analytics
+      if (
+        this.displayMode === 'standalone' ||
+        this.displayMode === 'standalone-ios'
+      )
+        this.ignoreInstall = true;
     });
   }
 
