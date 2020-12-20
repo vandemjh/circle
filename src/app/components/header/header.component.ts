@@ -27,19 +27,17 @@ export class HeaderComponent extends OnAutoChange implements OnInit {
     window.addEventListener('beforeinstallprompt', (event) => {
       event.preventDefault();
       this.promptEvent = event;
-      // console.log(event);
     });
     window.addEventListener('appinstalled', () => {
       this.ignoreInstall = true;
     });
     window.addEventListener('DOMContentLoaded', () => {
-      if (!Navigator['standalone'] && Navigator['standalone'].standalone) {
+      if (Navigator && Navigator['standalone'] && Navigator['standalone'].standalone) {
         this.displayMode = 'standalone-ios';
       }
       if (window.matchMedia('(display-mode: standalone)').matches) {
         this.displayMode = 'standalone';
       }
-      // Log launch display mode to analytics
       if (
         this.displayMode === 'standalone' ||
         this.displayMode === 'standalone-ios'

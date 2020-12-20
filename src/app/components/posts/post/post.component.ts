@@ -1,3 +1,10 @@
+import {
+  trigger,
+  state,
+  style,
+  transition,
+  animate,
+} from '@angular/animations';
 import { Component, OnInit, Input, SimpleChanges } from '@angular/core';
 import { Comment } from '../../../models/comment/comment';
 import { Post } from '../../../models/post/post';
@@ -10,6 +17,13 @@ import { DeviceDetectorService } from 'ngx-device-detector';
   selector: 'circle-post',
   templateUrl: './post.component.html',
   styleUrls: ['./post.component.css'],
+  animations: [
+    trigger('fadeInOut', [
+      state('in', style({ opacity: 1 })),
+      transition(':enter', [style({ opacity: 0 }), animate(400)]),
+      transition(':leave', animate(400, style({ opacity: 0 }))),
+    ]),
+  ],
 })
 export class PostComponent extends OnAutoChange implements OnInit {
   /**

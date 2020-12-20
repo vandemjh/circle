@@ -1,5 +1,5 @@
 <div class="padding">
-  <mat-card class="card" [ngStyle]="this.getMobileStyle()">
+  <mat-card [@fadeInOut]="'in'" class="card" [ngStyle]="this.getMobileStyle()">
     <ng-template [ngIf]="!!this.poster">
       <mat-card-header>
         <div
@@ -22,7 +22,12 @@
       </mat-card-header>
     </ng-template>
     <ng-template [ngIf]="!!this.post.iid">
-      <img mat-card-image [src]="getImageUrl()" (load)="this.setLoaded()" [hidden]="!this.isLoaded()" />
+      <img
+        mat-card-image
+        [src]="getImageUrl()"
+        (load)="this.setLoaded()"
+        [hidden]="!this.isLoaded()"
+      />
     </ng-template>
     <ng-template [ngIf]="!this.isLoaded()">
       <circle-spinner></circle-spinner>
