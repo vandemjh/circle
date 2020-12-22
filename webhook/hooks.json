@@ -2,7 +2,7 @@
   {
     "id": "redeploy",
     "execute-command": "/etc/webhook/redeploy.sh",
-    "command-working-directory": "/build",
+    "command-working-directory": "/circle",
     "pass-arguments-to-command": [
       {
         "source": "payload",
