@@ -1,9 +1,9 @@
 read -p "WEBHOOK_SECRET: " WEBHOOK_SECRET
 
 docker run \
+  --restart=unless-stopped \
   -d \
   --env WEBHOOK_SECRET=$WEBHOOK_SECRET \
-  --rm \
   -p 9000:9000 \
   -v ${PWD}/webhook/:/etc/webhook \
   --name=webhook \
